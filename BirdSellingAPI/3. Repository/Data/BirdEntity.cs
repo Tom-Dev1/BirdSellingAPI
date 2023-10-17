@@ -5,6 +5,7 @@ namespace BirdSellingAPI._3._Repository.Data
     [Table("Bird")]
     public class BirdEntity : Entity
     {
+
         public string category_id { get; set; }
         public string image {  get; set; }
         public decimal price { get; set; }

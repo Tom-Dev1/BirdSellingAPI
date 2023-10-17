@@ -3,7 +3,7 @@
 namespace BirdSellingAPI._3._Repository.Data
 {
     [Table("Address")]
-    public class AddressEntity
+    public class AddressEntity : Entity
     {
         public string AddressLine1 { get; set; } = null!;
 
