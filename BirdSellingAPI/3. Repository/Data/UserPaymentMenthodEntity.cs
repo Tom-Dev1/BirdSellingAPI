@@ -9,11 +9,11 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public string paymentType_id;
 
-        public string provide { get; set; };
+        public string provide { get; set; }
 
         public string account_number {  get; set; }
 
-        public string description { get; set; };
+        public string description { get; set; }
 
 
 

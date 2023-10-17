@@ -15,5 +15,8 @@ namespace BirdSellingAPI._3._Repository.Data
         public string bird_mother_id { get; set; }
         public string bird_father_id { get; set; }
 
+        [ForeignKey(nameof(category_id))]
+        public BirdCategoryEntity BirdCategory { get; set; }
+
     }
 }
