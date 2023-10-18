@@ -7,6 +7,6 @@ namespace BirdSellingAPI._3._Repository.Data
     public class BirdCategoryEntity : Entity 
 
     {
-        public string  category_name {  get; set; } 
+        public string?  category_name {  get; set; } 
     }
 }

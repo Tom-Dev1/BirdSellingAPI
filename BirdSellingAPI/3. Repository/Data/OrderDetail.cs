@@ -1,11 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdSellingAPI._3._Repository.Data
 {
     [Table("OrderDetail")]
     public class OrderDetail : Entity
     {
-        public string bird_id;
+       //foreign key for product
+        public string product_id;
+       
 
         public string order_id;
 
