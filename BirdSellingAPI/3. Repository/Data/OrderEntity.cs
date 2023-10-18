@@ -1,4 +1,4 @@
-﻿using BirdSellingAPI.Entity;
+﻿    using BirdSellingAPI.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdSellingAPI._3._Repository.Data
