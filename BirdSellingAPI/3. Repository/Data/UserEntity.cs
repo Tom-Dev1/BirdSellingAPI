@@ -14,10 +14,10 @@
 
         public string role_id;
 
-        public string adress_id;
+        public string address_id;
 
 
-     
+        
 
 
             

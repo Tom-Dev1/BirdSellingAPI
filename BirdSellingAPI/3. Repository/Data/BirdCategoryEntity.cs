@@ -7,8 +7,7 @@ namespace BirdSellingAPI._3._Repository.Data
     public class BirdCategoryEntity : Entity 
 
     {
-        public string?  category_name {  get; set; } 
-
-        public virtual ICollection<Product>
+        public string  category_name {  get; set; } 
+        public virtual ICollection<BirdEntity> Birds { get; set; }
     }
 }
