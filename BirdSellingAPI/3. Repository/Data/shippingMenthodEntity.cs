@@ -7,5 +7,8 @@ namespace BirdSellingAPI._3._Repository.Data
     {
         public string name { get; set; }
 
+
+        public virtual ICollection<OrderEntity> order { get; set; } 
+
     }
 }

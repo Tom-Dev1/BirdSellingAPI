@@ -15,8 +15,8 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public string description { get; set; }
 
-
-
+        [ForeignKey(nameof(paymentType_id))]
+        public paymentType paymentType { get; set; }
 
     }
 }

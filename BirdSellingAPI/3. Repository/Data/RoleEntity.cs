@@ -4,5 +4,10 @@
 
     {
         public string role_name { get; set; }
+
+        public virtual ICollection<RoleEntity> roles { get; set;}
     }
+    
+    
+
 }

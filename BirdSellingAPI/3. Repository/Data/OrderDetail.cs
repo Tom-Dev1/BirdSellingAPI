@@ -9,7 +9,6 @@ namespace BirdSellingAPI._3._Repository.Data
        //foreign key for product
         public string product_id;
        
-
         public string order_id;
 
         public decimal price;
@@ -19,5 +18,8 @@ namespace BirdSellingAPI._3._Repository.Data
         public string user_id;
 
         public string nest_id;
+
+        [ForeignKey(nameof(nest_id))]
+        public NestEntity nest {  get; set; }
     }
 }

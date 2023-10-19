@@ -27,6 +27,7 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public DateTimeOffset day_of_birth { get; set; }
         [ForeignKey(nameof(category_id))]
+        public BirdCategoryEntity BirdCategory { get; set; }
 
     }
 }

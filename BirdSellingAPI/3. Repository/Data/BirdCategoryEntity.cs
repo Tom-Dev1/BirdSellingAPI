@@ -8,6 +8,8 @@ namespace BirdSellingAPI._3._Repository.Data
 
     {
         public string  category_name {  get; set; } 
-        public virtual ICollection<BirdEntity> Birds { get; set; }
+
+        public virtual ICollection<ProductEntity> Products { get; set; }
+
     }
 }
