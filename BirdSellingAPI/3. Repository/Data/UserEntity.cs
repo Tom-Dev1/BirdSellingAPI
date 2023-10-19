@@ -2,6 +2,7 @@
 
 namespace BirdSellingAPI._3._Repository.Data
 {
+    [Table("User")]
     public class UserEntity : Entity 
     {
         public string userName { get; set; }
@@ -22,9 +23,8 @@ namespace BirdSellingAPI._3._Repository.Data
         [ForeignKey(nameof(role_id))]
         public RoleEntity Role {  get; set; }
 
-
         [ForeignKey(nameof(address_id))]
-        public AddressEntity Address { get; set; }
+        public AddressEntity address { get; set; }
 
     }
 }

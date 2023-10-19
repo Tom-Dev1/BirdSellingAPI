@@ -1,5 +1,4 @@
-﻿    using BirdSellingAPI.Entity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdSellingAPI._3._Repository.Data
 {
@@ -20,7 +19,7 @@ namespace BirdSellingAPI._3._Repository.Data
         public  bool orderStatus {  get; set; }
 
 
-        [ForeignKey(nameof(shippingMenthodEntity))]
+        [ForeignKey(nameof(shippingMenthod_id))]
         public shippingMenthodEntity shippingMenthodEntity { get; set; }
 
     }

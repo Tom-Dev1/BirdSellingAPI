@@ -6,6 +6,7 @@ namespace BirdSellingAPI._3._Repository.Data
     {
         protected Entity()
         {
+            Id = Guid.NewGuid().ToString("N");
             CreatedTime = LastUpdatedTime = DateTime.Now;
         }
         [Key]

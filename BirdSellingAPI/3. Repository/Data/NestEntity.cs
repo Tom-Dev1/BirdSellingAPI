@@ -5,7 +5,7 @@ namespace BirdSellingAPI._3._Repository.Data
     [Table("Nest")]
     public class NestEntity : Entity
     {
-        public string? name { get; set; };
+        public string? name { get; set; }
         public string? image { get; set; }
 
         public virtual ICollection<OrderDetail> orderDetail { get; set; }   
