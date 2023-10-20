@@ -15,6 +15,8 @@ namespace BirdSellingAPI._3._Repository.Data
         {
         }
 
+
+
         public DbSet<AddressEntity> addressEntities { get; set; }
         public DbSet<BirdCategoryEntity> birdCategoryEntities { get; set; }
         public DbSet<ProductEntity> birdEntities { get; set; }
@@ -29,5 +31,26 @@ namespace BirdSellingAPI._3._Repository.Data
         public DbSet<UserEntity> userEntities { get; set; }
         public DbSet<UserPaymentMenthodEntity> userPaymentMenthodEntities { get; set; }
         public DbSet<userReviewEntiry> userReviewEntiries { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+
+                optionsBuilder.UseSqlServer(GetConnectionString());
+            }
+        }
+
+        private string GetConnectionString()
+        {
+            IConfiguration config = new ConfigurationBuilder()
+                 .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", true, true)
+                        .Build();
+            var strConn = config["ConnectionStrings:BirdFarm"];
+
+            return strConn;
+        }
+
     }
 }

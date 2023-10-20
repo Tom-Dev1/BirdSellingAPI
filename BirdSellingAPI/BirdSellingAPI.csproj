@@ -21,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="1. Web\" />
     <Folder Include="2. Service\" />
   </ItemGroup>
 

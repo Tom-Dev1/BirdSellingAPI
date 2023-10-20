@@ -1,4 +1,6 @@
+using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
+using BirdSellingAPI._3._Repository.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,10 +11,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<BirdFarmContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarm"));
 });
+
+builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IBirdCategoryRepository, BirdCategoryRepository>();
 
 
 var app = builder.Build();
