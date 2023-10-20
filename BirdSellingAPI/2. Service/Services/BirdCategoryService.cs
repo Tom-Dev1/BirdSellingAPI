@@ -1,0 +1,89 @@
+﻿using AutoMapper;
+using BirdSellingAPI._2._Service.IServices;
+using BirdSellingAPI._2._Service.Model;
+using BirdSellingAPI._2._Service.Model.BirdCategory;
+using BirdSellingAPI._3._Repository.BaseRepository;
+using BirdSellingAPI._3._Repository.Data;
+
+namespace BirdSellingAPI._2._Service.Services
+{
+    public class BirdCategoryService : IBirdCategoryService
+    {
+        private readonly IRepositoryBase<BirdCategoryEntity> _birdCategoryRepository;
+        private readonly IMapper _mapper;
+
+        public BirdCategoryService(IRepositoryBase<BirdCategoryEntity> repositoryBase, IMapper mapper) 
+        {
+            _birdCategoryRepository = repositoryBase;
+            _mapper = mapper;
+
+        }
+
+
+        public ResponseModel CreateBirdCategory(RequestBirdCategoryModel entity)
+        {
+            var birdCategoryEntity = _mapper.Map<BirdCategoryEntity>(entity);
+            _birdCategoryRepository.Create(birdCategoryEntity);
+            return new ResponseModel
+            {
+                Data = birdCategoryEntity,
+                MessageError = "",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        public ResponseModel GetAll()
+        {
+            var response = _birdCategoryRepository.GetAll();
+            return new ResponseModel
+            {
+                Data = response,
+                MessageError = "",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        public ResponseModel GetBirdCategoryByName(string? name) 
+        {
+            var response = _birdCategoryRepository.Get(x => x.category_name == name);
+            return new ResponseModel
+            {
+                Data = response,
+                MessageError = "",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+
+        //public ResponseModel GetSingle(string id)
+        //{
+        //    var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
+        //    var responseBirdCategoryModel = _mapper.Map<ResponseBirdCategoryModel>(birdCategoryEntity);
+        //    return new ResponseModel
+        //    {
+        //        Data = birdCategoryEntity,
+        //        MessageError = "",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        //public ResponseModel DeleteBirdCategory(string id)
+        //{
+        //    var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
+        //    if (birdCategoryEntity == null)
+        //    {
+        //        return new ResponseModel
+        //        {
+        //            MessageError = "Khong tim thay",
+        //            StatusCode = StatusCodes.Status404NotFound
+        //        };
+        //    }
+        //    _birdCategoryRepository.Delete(birdCategoryEntity);
+        //    return new ResponseModel
+        //    {
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+    }
+}

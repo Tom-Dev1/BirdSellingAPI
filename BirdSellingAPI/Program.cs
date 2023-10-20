@@ -1,3 +1,5 @@
+using BirdSellingAPI._2._Service.IServices;
+using BirdSellingAPI._2._Service.Services;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._3._Repository.Repository;
@@ -16,11 +18,15 @@ builder.Services.AddDbContext<BirdFarmContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarm"));
 });
+builder.Services.AddAutoMapper(typeof(Program));
 
+// Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-builder.Services.AddScoped<IBirdCategoryRepository, BirdCategoryRepository>();
+builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
 
+//Service
+builder.Services.AddScoped<IBirdCategoryService, BirdCategoryService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 var app = builder.Build();
 

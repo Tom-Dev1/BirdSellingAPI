@@ -1,13 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace BirdSellingAPI._3._Repository.Data
+﻿namespace BirdSellingAPI._4._Core.Model.Product
 {
-    [Table("Product")]
-    public class ProductEntity : Entity
+    public class RequestProductModel
     {
         public string category_id { get; set; }
 
-        public string image {  get; set; }
+        public string image { get; set; }
 
         public decimal price { get; set; }
 
@@ -22,10 +19,6 @@ namespace BirdSellingAPI._3._Repository.Data
         public string bird_father_id { get; set; }
 
         public bool is_egg { get; set; }
-
         public DateTimeOffset day_of_birth { get; set; }
-        [ForeignKey(nameof(category_id))]
-        public BirdCategoryEntity BirdCategory { get; set; }
-
     }
 }
