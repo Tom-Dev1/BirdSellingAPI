@@ -6,5 +6,7 @@ namespace BirdSellingAPI._3._Repository.Data
     public class paymentType : Entity
     {
         public string name { get; set; }
+
+        public virtual  ICollection<UserPaymentMenthodEntity> PaymentMenthod { get; set;}
     }
 }

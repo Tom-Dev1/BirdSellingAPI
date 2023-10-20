@@ -14,6 +14,7 @@ namespace BirdSellingAPI._3._Repository.BaseRepository
             _context = new BirdFarmContext();
             _dbSet = _context.Set<T>();
         }
+
         protected DbSet<T> DbSet
         {
             get
@@ -36,7 +37,8 @@ namespace BirdSellingAPI._3._Repository.BaseRepository
 
         public void Delete(T entity)
         {
-            throw new NotImplementedException();
+            _dbSet.Remove(entity);
+            _context.SaveChanges();
         }
 
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties)

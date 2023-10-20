@@ -1,5 +1,8 @@
-﻿namespace BirdSellingAPI._3._Repository.Data
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BirdSellingAPI._3._Repository.Data
 {
+    [Table("UserReview")]
     public class userReviewEntiry : Entity
     {
         public string user_id;

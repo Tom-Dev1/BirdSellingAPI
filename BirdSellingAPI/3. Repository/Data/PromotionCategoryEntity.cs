@@ -8,5 +8,8 @@ namespace BirdSellingAPI._3._Repository.Data
         public string birdCategory {  get; set; }
 
         public string promotionCategory_id { get; set; }
+
+        [ForeignKey(nameof(promotionCategory_id))]
+        public string promotionCategory { get; set; }
     }
 }
