@@ -5,13 +5,13 @@ namespace BirdSellingAPI._3._Repository.Data
     [Table("User")]
     public class UserEntity : Entity 
     {
-        public string userName { get; set; }
+        public string? userName { get; set; }
 
-        public string userPassword { get; set; }
+        public string? userPassword { get; set; }
 
-        public string userEmail { get; set; }
+        public string? userEmail { get; set; }
 
-        public string userPhone { get; set; }
+        public string? userPhone { get; set; }
 
         public DateTimeOffset? createdAt { get; set; }
 

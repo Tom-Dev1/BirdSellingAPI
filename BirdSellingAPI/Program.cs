@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BirdFarmContext>(options =>
+builder.Services.AddDbContext<BirdFarmContext> (options => 
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarm"));
 });

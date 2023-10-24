@@ -9,9 +9,9 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public string bird_id;
 
-        public string rating_value {  get; set; }
+        public string? rating_value {  get; set; }
 
-        public string comment { get; set; }
+        public string? comment { get; set; }
 
 
 

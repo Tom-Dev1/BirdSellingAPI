@@ -11,9 +11,9 @@ namespace BirdSellingAPI._3._Repository.Data
        
         public string order_id;
 
-        public decimal price;
+        public decimal? price;
 
-        public decimal quantity;
+        public decimal? quantity;
 
         public string user_id;
 

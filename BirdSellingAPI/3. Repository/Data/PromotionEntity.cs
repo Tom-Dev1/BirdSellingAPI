@@ -5,9 +5,9 @@ namespace BirdSellingAPI._3._Repository.Data
     [Table("Promotion")]
     public class PromotionEntity : Entity
     {
-        public string name { get; set; }
+        public string? name { get; set; }
 
-        public string description { get; set; }
+        public string? description { get; set; }
 
         public DateTimeOffset start_day { get; set; }
 

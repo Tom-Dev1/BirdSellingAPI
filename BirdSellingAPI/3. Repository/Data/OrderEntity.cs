@@ -14,9 +14,9 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public string shippingMenthod_id;
 
-        public string orderTotal {  get; set; }
+        public string? orderTotal {  get; set; }
 
-        public  bool orderStatus {  get; set; }
+        public  bool? orderStatus {  get; set; }
 
 
         [ForeignKey(nameof(shippingMenthod_id))]
