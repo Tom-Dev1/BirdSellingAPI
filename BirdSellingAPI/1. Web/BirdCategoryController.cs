@@ -15,6 +15,7 @@ namespace BirdSellingAPI._1._Web
             _birdCategoryService = birdCategoryService;
         }
 
+        //Create
         [HttpPost]
         [Route("api/[controller]/CreateBirdCategory")]
         public IActionResult CreateBirdCategory (RequestBirdCategoryModel requestBirdCategoryModel)
@@ -38,5 +39,30 @@ namespace BirdSellingAPI._1._Web
             var responseModel = _birdCategoryService.GetBirdCategoryByName(name);
             return Ok(responseModel);
         }
+
+        [HttpGet]
+        [Route("api/[controller]/GetSingleID")]
+        public IActionResult GetSingleID(string id)
+        {
+            var responseModel = _birdCategoryService.GetSingle(id);
+            return Ok(responseModel);  
+            
+        }
+        [HttpPut]
+        [Route("api/[controller]/UpdateBirdCategory")]
+        public IActionResult UpdateBirdCategory(string id, RequestBirdCategoryModel requestBirdCategoryModel)
+        {
+            var responseModel = _birdCategoryService.UpdateBirdCategory(id, requestBirdCategoryModel);
+            return Ok(responseModel);
+        }
+
+        [HttpDelete]
+        [Route("api/[controller]/DeleteBirdCategory")]
+        public IActionResult DeleteBirdCategory(string id) 
+        {
+            var responseModel = _birdCategoryService.DeleteBirdCategory(id);
+            return Ok(responseModel);
+        }
+
     }
 }

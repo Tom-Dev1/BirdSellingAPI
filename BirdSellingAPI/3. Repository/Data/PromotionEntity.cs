@@ -13,7 +13,7 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public DateTimeOffset end_day { get; set; }
 
-        public virtual ICollection<PromotionCategoryEntity> PromotionCategory { get; set; }
+        public virtual ICollection<PromotionCategoryEntity> Promotion { get; set; }
 
     }
 }

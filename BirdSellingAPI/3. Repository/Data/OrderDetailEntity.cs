@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BirdSellingAPI._3._Repository.Data
 {
     [Table("OrderDetail")]
-    public class OrderDetail : Entity
+    public class OrderDetailEntity : Entity
     {
        //foreign key for product
         public string product_id;
