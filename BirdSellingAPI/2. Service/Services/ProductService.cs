@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using BirdSellingAPI._2._Service.IServices;
 using BirdSellingAPI._2._Service.Model;
+using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.Product;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BirdSellingAPI._2._Service.Services
 {
@@ -29,14 +31,72 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
 
-        public ResponseModel GetProductByBirdCategoryID(string id)
+        public ResponseModel DeleteProduct(string id)
         {
-            var entity = _productRepository.Get(x => x.category_id == id).ToList();
-            var responseModel = _mapper.Map<List<ResponseProductModel>>(entity);
+            var productEntity = _productRepository.GetById(id);
+            if (productEntity == null)
+            {
+                return new ResponseModel
+                {
+                    StatusCode = StatusCodes.Status404NotFound,
+                    MessageError = "Khong tim thay san pham",
+                };
+            }
+            _productRepository.Delete(productEntity);
             return new ResponseModel
             {
-                Data = responseModel,
-                MessageError = "",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        public ResponseModel GetListProduct(GetProductModel getProductModel)
+        {
+            var a = getProductModel.priceTo;
+            var responseProductList = _productRepository.Get(x => x.name.Contains(getProductModel.name) &&
+            (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)).ToList();
+            if (getProductModel.is_egg.HasValue)
+            {
+                responseProductList = responseProductList.Where(x => x.is_egg == getProductModel.is_egg).ToList();
+            }
+            if (getProductModel.sex.HasValue)
+            {
+                responseProductList = responseProductList.Where(x => x.sex == getProductModel.sex).ToList();
+            }
+            return new ResponseModel
+            {
+                Data = responseProductList,
+                StatusCode = StatusCodes.Status200OK,
+            };
+        }
+
+        //public ResponseModel GetProductByBirdCategoryID(string id)
+        //{
+        //    var entity = _productRepository.Get(x => x.category_id == id).ToList();
+        //    var responseModel = _mapper.Map<List<ResponseProductModel>>(entity);
+        //    return new ResponseModel
+        //    {
+        //        Data = responseModel,
+        //        MessageError = "",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        public ResponseModel UpdateProduct(string id, RequestProductModel requestProductModel)
+        {
+            var productEntity = _productRepository.GetSingle(x => x.Id.Equals(id));
+            if (productEntity == null)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Khong tim thay",
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+            }
+            _mapper.Map(requestProductModel, productEntity);
+            _productRepository.Update(productEntity);
+            //_birdCategoryRepository.Delete(birdCategoryEntity);
+            return new ResponseModel
+            {
                 StatusCode = StatusCodes.Status200OK
             };
         }
