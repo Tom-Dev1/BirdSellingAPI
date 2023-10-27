@@ -38,5 +38,12 @@ namespace BirdSellingAPI._1._Web
             var responseModel = _birdCategoryService.GetBirdCategoryByName(name);
             return Ok(responseModel);
         }
+        [HttpPut]
+        [Route("api/[controller]/UpdateBirdCategory")]
+        public IActionResult UpdateBirdCategory(string id, RequestBirdCategoryModel requestBirdCategoryModel)
+        {
+            var responseModel = _birdCategoryService.UpdateBirdCategory(id, requestBirdCategoryModel);   
+            return Ok(responseModel);
+        }
     }
 }

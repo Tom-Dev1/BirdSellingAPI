@@ -67,23 +67,25 @@ namespace BirdSellingAPI._2._Service.Services
         //    };
         //}
 
-        //public ResponseModel DeleteBirdCategory(string id)
-        //{
-        //    var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
-        //    if (birdCategoryEntity == null)
-        //    {
-        //        return new ResponseModel
-        //        {
-        //            MessageError = "Khong tim thay",
-        //            StatusCode = StatusCodes.Status404NotFound
-        //        };
-        //    }
-        //    _birdCategoryRepository.Delete(birdCategoryEntity);
-        //    return new ResponseModel
-        //    {
-        //        StatusCode = StatusCodes.Status200OK
-        //    };
-        //}
+        public ResponseModel UpdateBirdCategory(string id, RequestBirdCategoryModel requestBirdCategoryModel)
+        {
+            var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
+            if (birdCategoryEntity == null)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Khong tim thay",
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+            }
+            _mapper.Map(requestBirdCategoryModel, birdCategoryEntity);
+            _birdCategoryRepository.Update(birdCategoryEntity);
+            //_birdCategoryRepository.Delete(birdCategoryEntity);
+            return new ResponseModel
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
 
     }
 }

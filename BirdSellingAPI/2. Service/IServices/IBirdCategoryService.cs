@@ -8,5 +8,6 @@ namespace BirdSellingAPI._2._Service.IServices
         public ResponseModel CreateBirdCategory(RequestBirdCategoryModel requestBirdCategory);
         public ResponseModel GetAll();
         public ResponseModel GetBirdCategoryByName(string? name);
+        public ResponseModel UpdateBirdCategory(string id, RequestBirdCategoryModel requestBirdCategoryModel);
     }
 }
