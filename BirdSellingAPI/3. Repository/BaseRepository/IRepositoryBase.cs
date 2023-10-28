@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using BirdSellingAPI._3._Repository.Data;
+using System.Linq.Expressions;
 
 namespace BirdSellingAPI._3._Repository.BaseRepository
 {
@@ -11,5 +12,6 @@ namespace BirdSellingAPI._3._Repository.BaseRepository
         public void Delete (T entity);
         public T GetSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate = null, params Expression<Func<T, object>>[] includeProperties);
+        // void Create(BirdCategoryEntity orderEntity);
     }
 }

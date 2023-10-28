@@ -10,5 +10,8 @@ namespace BirdSellingAPI._2._Service.IServices
         public ResponseModel UpdateProduct(string id, RequestProductModel requestProductModel);
         public ResponseModel DeleteProduct(string id);
 
+        //public ResponseModel GetAll();
+
+
     }
 }

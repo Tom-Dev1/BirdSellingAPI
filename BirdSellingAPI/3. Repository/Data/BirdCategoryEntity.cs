@@ -2,10 +2,8 @@
 
 namespace BirdSellingAPI._3._Repository.Data
 {
-
     [Table("BirdCategory")]
     public class BirdCategoryEntity : Entity 
-
     {
         public string  category_name {  get; set; } 
 
