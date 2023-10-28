@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.Data;
-using BirdSellingAPI._4._Core.Model.Address;
 using BirdSellingAPI._4._Core.Model.Nest;
 using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.OrderDetail;
@@ -29,9 +28,6 @@ namespace CarCategoriesApi.Helpers
             CreateMap<ProductEntity, RequestProductModel>().ReverseMap();
             CreateMap<ProductEntity, ResponseProductModel>().ReverseMap();
 
-            //Address
-            CreateMap<AddressEntity, RequestAddressModel>().ReverseMap();
-            CreateMap<AddressEntity, ResponseAddressModel>().ReverseMap();
 
             //Nest
             CreateMap<NestEntity, RequestNestModel>().ReverseMap();
@@ -71,7 +67,7 @@ namespace CarCategoriesApi.Helpers
 
             //User PaymentMenthod
             CreateMap<UserPaymentMenthodEntity, RequestUserPaymentModel>().ReverseMap();
-            CreateMap<UserPaymentMenthodEntity, ResponseAddressModel>().ReverseMap();
+            CreateMap<UserPaymentMenthodEntity, ResponseUserPaymentModel>().ReverseMap();
 
             //User Review
             CreateMap<userReviewEntiry, RequestUserReviewModel>().ReverseMap();
