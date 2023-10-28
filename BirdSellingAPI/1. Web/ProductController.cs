@@ -13,6 +13,7 @@ namespace BirdSellingAPI._1._Web
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productSerivce;
+        //private readonly object _productRepository;
 
         public ProductController(IProductService service) 
         {

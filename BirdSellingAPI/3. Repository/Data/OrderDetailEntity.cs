@@ -4,16 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace BirdSellingAPI._3._Repository.Data
 {
     [Table("OrderDetail")]
-    public class OrderDetail : Entity
+    public class OrderDetailEntity : Entity
     {
        //foreign key for product
         public string product_id;
        
         public string order_id;
 
-        public decimal price;
+        public decimal? price;
 
-        public decimal quantity;
+        public decimal? quantity;
 
         public string user_id;
 

@@ -14,7 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<BirdFarmContext>(options =>
+builder.Services.AddDbContext<BirdFarmContext> (options => 
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarm"));
 });
@@ -23,14 +23,25 @@ builder.Services.AddAutoMapper(typeof(Program));
 // Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
-builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRepositoryBase<AddressEntity>, RepositoryBase<AddressEntity>>();
+builder.Services.AddScoped<IRepositoryBase<NestEntity>, RepositoryBase<NestEntity>>();
+builder.Services.AddScoped<IRepositoryBase<PaymentTypeEntity>, RepositoryBase<PaymentTypeEntity>>();
+builder.Services.AddScoped<IRepositoryBase<PromotionEntity>, RepositoryBase<PromotionEntity>>();
+builder.Services.AddScoped<IRepositoryBase<PromotionCategoryEntity>, RepositoryBase<PromotionCategoryEntity>>();
+
 
 
 
 //Service
 builder.Services.AddScoped<IBirdCategoryService, BirdCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<INestService, NestService>();
+builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
+builder.Services.AddScoped<IPromotionService, PromotionService>();
+builder.Services.AddScoped<IPromotionCategoryService, PromotionCategoryService>();
+
+
 
 var app = builder.Build();
 

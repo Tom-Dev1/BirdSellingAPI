@@ -31,7 +31,7 @@ namespace BirdSellingAPI._2._Service.Services
                 StatusCode = StatusCodes.Status200OK
             };
         }
-
+        //Get ALL
         public ResponseModel GetAll()
         {
             var response = _birdCategoryRepository.GetAll();
@@ -54,22 +54,23 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
 
-
-        //public ResponseModel GetSingle(string id)
-        //{
-        //    var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
-        //    var responseBirdCategoryModel = _mapper.Map<ResponseBirdCategoryModel>(birdCategoryEntity);
-        //    return new ResponseModel
-        //    {
-        //        Data = birdCategoryEntity,
-        //        MessageError = "",
-        //        StatusCode = StatusCodes.Status200OK
-        //    };
-        //}
-
-        public ResponseModel UpdateBirdCategory(string id, RequestBirdCategoryModel requestBirdCategoryModel)
+        //GetID
+        public ResponseModel GetSingle(string id)
         {
             var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
+            var responseBirdCategoryModel = _mapper.Map<ResponseBirdCategoryModel>(birdCategoryEntity);
+            return new ResponseModel
+            {
+                Data = birdCategoryEntity,
+                MessageError = "",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        //Update
+        public ResponseModel UpdateBirdCategory(string id, RequestBirdCategoryModel requestBirdCategoryModel)       
+        { 
+            var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => id.Equals(x.Id));
             if (birdCategoryEntity == null)
             {
                 return new ResponseModel
@@ -80,7 +81,25 @@ namespace BirdSellingAPI._2._Service.Services
             }
             _mapper.Map(requestBirdCategoryModel, birdCategoryEntity);
             _birdCategoryRepository.Update(birdCategoryEntity);
-            //_birdCategoryRepository.Delete(birdCategoryEntity);
+            return new ResponseModel
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        //Delete bY ID
+        public ResponseModel DeleteBirdCategory(string id)
+        {
+            var birdCategoryEntity = _birdCategoryRepository.GetSingle(x => x.Id.Equals(id));
+            if (birdCategoryEntity == null)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Khong tim thay",
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+            }
+            _birdCategoryRepository.Delete(birdCategoryEntity);
             return new ResponseModel
             {
                 StatusCode = StatusCodes.Status200OK

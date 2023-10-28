@@ -12,5 +12,8 @@ namespace BirdSellingAPI._2._Service.IServices
         public ResponseModel GetProductByID(string id);
 
 
+        //public ResponseModel GetAll();
+
+
     }
 }
