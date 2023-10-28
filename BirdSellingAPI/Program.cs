@@ -28,6 +28,7 @@ builder.Services.AddScoped<IRepositoryBase<PaymentTypeEntity>, RepositoryBase<Pa
 builder.Services.AddScoped<IRepositoryBase<PromotionEntity>, RepositoryBase<PromotionEntity>>();
 builder.Services.AddScoped<IRepositoryBase<PromotionCategoryEntity>, RepositoryBase<PromotionCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<RoleEntity>, RepositoryBase<RoleEntity>>();
+builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
 
 
 
@@ -40,6 +41,7 @@ builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IPromotionCategoryService, PromotionCategoryService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 
