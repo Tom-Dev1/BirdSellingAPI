@@ -4,6 +4,7 @@ using BirdSellingAPI._3._Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdSellingAPI.Migrations
 {
     [DbContext(typeof(BirdFarmContext))]
-    partial class BirdFarmContextModelSnapshot : ModelSnapshot
+    [Migration("20231028082820_DeleteAddressEntity")]
+    partial class DeleteAddressEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,10 +112,11 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<bool?>("orderStatus")
+                    b.Property<bool>("orderStatus")
                         .HasColumnType("bit");
 
                     b.Property<string>("orderTotal")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("order_date")
@@ -144,9 +148,11 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("bird_father_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("bird_mother_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("category_id")
@@ -157,21 +163,24 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("image")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("is_egg")
+                    b.Property<bool>("is_egg")
                         .HasColumnType("bit");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("price")
                         .HasColumnType("decimal(38,4)");
 
-                    b.Property<bool?>("sex")
+                    b.Property<bool>("sex")
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
@@ -232,12 +241,14 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("end_day")
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("start_day")
@@ -263,6 +274,7 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("role_name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -295,15 +307,19 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("userEmail")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userPassword")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("userPhone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -328,9 +344,11 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("account_number")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("paymentType_id")
@@ -338,6 +356,7 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("provide")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -362,6 +381,7 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -384,6 +404,7 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -406,9 +427,11 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("comment")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rating_value")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

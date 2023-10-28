@@ -35,7 +35,13 @@ namespace BirdSellingAPI._1._Web
             var response = _productSerivce.GetListProduct(getProductModel);
             return Ok(response);
         }
-
+        [HttpGet]
+        [Route("api/[controller]/GetProductByID/{id}")]
+        public IActionResult GetProductByID(string id)
+        {
+            var response = _productSerivce.GetProductByID(id);
+            return Ok(response);
+        }
 
         [HttpDelete]
         [Route("api/[controller]/DeleteProduct/{id}")]

@@ -51,9 +51,13 @@ namespace BirdSellingAPI._2._Service.Services
 
         public ResponseModel GetListProduct(GetProductModel getProductModel)
         {
-            var a = getProductModel.priceTo;
-            var responseProductList = _productRepository.Get(x => x.name.Contains(getProductModel.name) &&
-            (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)).ToList();
+            if (getProductModel.category_id == null)
+            {
+                getProductModel.category_id = "";
+            }
+            var responseProductList = _productRepository.Get(x => x.category_id.Contains(getProductModel.category_id)
+            && x.name.Contains(getProductModel.name) 
+            && (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)).ToList();
             if (getProductModel.is_egg.HasValue)
             {
                 responseProductList = responseProductList.Where(x => x.is_egg == getProductModel.is_egg).ToList();
@@ -69,17 +73,17 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
 
-        //public ResponseModel GetProductByBirdCategoryID(string id)
-        //{
-        //    var entity = _productRepository.Get(x => x.category_id == id).ToList();
-        //    var responseModel = _mapper.Map<List<ResponseProductModel>>(entity);
-        //    return new ResponseModel
-        //    {
-        //        Data = responseModel,
-        //        MessageError = "",
-        //        StatusCode = StatusCodes.Status200OK
-        //    };
-        //}
+        public ResponseModel GetProductByID(string id)
+        {
+            var entity = _productRepository.GetSingle(x => x.Id.Equals(id));
+            var responseModel = _mapper.Map<ResponseProductModel>(entity);
+            return new ResponseModel
+            {
+                Data = responseModel,
+                MessageError = "",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
 
         public ResponseModel UpdateProduct(string id, RequestProductModel requestProductModel)
         {

@@ -4,6 +4,7 @@ namespace BirdSellingAPI._4._Core.Model.Product
 {
     public class GetProductModel
     {
+        public string? category_id { get; set; }
         public string? name { get; set; } 
         public bool? sex { get; set; }
         public bool? is_egg { get; set; }
