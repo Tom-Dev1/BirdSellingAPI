@@ -30,6 +30,8 @@ namespace BirdSellingAPI._3._Repository.Data
         public DbSet<UserEntity> userEntities { get; set; }
         public DbSet<UserPaymentMenthodEntity> userPaymentMenthodEntities { get; set; }
         public DbSet<userReviewEntiry> userReviewEntiries { get; set; }
+        public DbSet<UserRefreshToken> userRefreshTokens { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

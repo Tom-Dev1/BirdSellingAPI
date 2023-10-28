@@ -2,6 +2,8 @@
 {
     public class SignInModel
     {
-        
+        public string userName { get; set; }
+
+        public string userPassword { get; set; }
     }
 }

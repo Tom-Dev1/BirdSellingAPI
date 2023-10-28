@@ -3,6 +3,7 @@ using BirdSellingAPI._2._Service.Services;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._3._Repository.Repository;
+using BirdSellingAPI._4._Core.Helper;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -27,6 +28,10 @@ builder.Services.AddScoped<IRepositoryBase<NestEntity>, RepositoryBase<NestEntit
 builder.Services.AddScoped<IRepositoryBase<PaymentTypeEntity>, RepositoryBase<PaymentTypeEntity>>();
 builder.Services.AddScoped<IRepositoryBase<PromotionEntity>, RepositoryBase<PromotionEntity>>();
 builder.Services.AddScoped<IRepositoryBase<PromotionCategoryEntity>, RepositoryBase<PromotionCategoryEntity>>();
+builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
+builder.Services.AddScoped<IRepositoryBase<UserRefreshToken>, RepositoryBase<UserRefreshToken>>();
+
+
 
 
 
@@ -38,8 +43,11 @@ builder.Services.AddScoped<INestService, NestService>();
 builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IPromotionCategoryService, PromotionCategoryService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 
+//Auth
+builder.Services.AddScoped<GenerateToken>();
 
 var app = builder.Build();
 
