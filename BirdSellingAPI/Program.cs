@@ -23,6 +23,9 @@ builder.Services.AddAutoMapper(typeof(Program));
 // Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
+builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
 
 
 //Service

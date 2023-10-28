@@ -17,14 +17,13 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public string role_id;
 
-        public string address_id;
+        public string? AddressLine { get; set; }
 
 
         [ForeignKey(nameof(role_id))]
         public RoleEntity Role {  get; set; }
 
-        [ForeignKey(nameof(address_id))]
-        public AddressEntity address { get; set; }
+
 
     }
 }
