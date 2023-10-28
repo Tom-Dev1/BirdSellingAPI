@@ -29,12 +29,39 @@ namespace BirdSellingAPI._1._Web
         }
 
         [HttpGet]
-        [Route("api/[controller]/GetProductByBirdCategoryId")]
-        public IActionResult GetProductByBirdCategoryId(string id)
+        [Route("api/[controller]/GetProduct")]
+        public IActionResult GetProduct([FromQuery]GetProductModel getProductModel)
         {
-            var response = _productSerivce.GetProductByBirdCategoryID(id);
+            var response = _productSerivce.GetListProduct(getProductModel);
             return Ok(response);
         }
+
+
+        [HttpDelete]
+        [Route("api/[controller]/DeleteProduct/{id}")]
+        public IActionResult DeleteProduct(string id)
+        {
+            var response = _productSerivce.DeleteProduct(id);
+            return Ok(response);
+        }
+
+
+        [HttpPut]
+        [Route("api/[controller]/UpdateProduct/{id}")]
+        public IActionResult UpdateProduct(string id, RequestProductModel requestProductModel)
+        {
+            var response = _productSerivce.UpdateProduct(id, requestProductModel);
+            return Ok(response);
+        }
+
+        //[HttpPut]
+        //[Route("api/[controller]/UpdateProduct")]
+        //public IActionResult UpdateProduct(string id, RequestProductModel requestProductModel)
+        //{
+        //    var response = _productSerivce.Update;
+        //    return Ok(response);
+        //}
+
 
         //[HttpGet]
         //[Route("api/[controller]/GetAll")]

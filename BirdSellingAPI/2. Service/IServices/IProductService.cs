@@ -6,7 +6,9 @@ namespace BirdSellingAPI._2._Service.IServices
     public interface IProductService
     {
         public ResponseModel CreateProduct (RequestProductModel requestProductModel);
-        public ResponseModel GetProductByBirdCategoryID(string id);
+        public ResponseModel GetListProduct(GetProductModel getProductModel);
+        public ResponseModel UpdateProduct(string id, RequestProductModel requestProductModel);
+        public ResponseModel DeleteProduct(string id);
 
         //public ResponseModel GetAll();
 

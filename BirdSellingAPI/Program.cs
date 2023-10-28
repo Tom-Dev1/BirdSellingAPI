@@ -31,6 +31,7 @@ builder.Services.AddScoped<IRepositoryBase<PromotionCategoryEntity>, RepositoryB
 
 
 
+
 //Service
 builder.Services.AddScoped<IBirdCategoryService, BirdCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();

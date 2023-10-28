@@ -7,9 +7,9 @@ namespace BirdSellingAPI._3._Repository.Data
     {
         public string category_id { get; set; }
 
-        public string? image {  get; set; }
-
-        public decimal? price { get; set; }
+        public string image {  get; set; }
+        [Column(TypeName = "decimal(38,4)")]
+        public decimal price { get; set; }
 
         public string? name { get; set; }
 
