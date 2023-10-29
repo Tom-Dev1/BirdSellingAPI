@@ -1,5 +1,6 @@
 ﻿using BirdSellingAPI._2._Service.IServices;
 using BirdSellingAPI._2._Service.Model.BirdCategory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,7 @@ namespace BirdSellingAPI._1._Web
         }
 
         [HttpGet]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = ("Admin, Manager"))]
         [Route("api/[controller]/GetAll")]
         public IActionResult GetAllBirdCategory()
         {

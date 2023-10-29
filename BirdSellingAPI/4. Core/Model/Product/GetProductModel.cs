@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using BirdSellingAPI._4._Core.EnumCore;
+using System.ComponentModel;
 
 namespace BirdSellingAPI._4._Core.Model.Product
 {
@@ -7,7 +8,7 @@ namespace BirdSellingAPI._4._Core.Model.Product
         public string? category_id { get; set; }
         public string? name { get; set; } 
         public bool? sex { get; set; }
-        public bool? is_egg { get; set; }
+        public TypeProduct? TypeProduct { get; set; }
         public decimal? priceFrom { get; set; }
         public decimal? priceTo { get; set; }
         

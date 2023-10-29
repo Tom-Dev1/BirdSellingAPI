@@ -58,9 +58,9 @@ namespace BirdSellingAPI._2._Service.Services
             var responseProductList = _productRepository.Get(x => x.category_id.Contains(getProductModel.category_id)
             && x.name.Contains(getProductModel.name) 
             && (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)).ToList();
-            if (getProductModel.is_egg.HasValue)
+            if (getProductModel.TypeProduct.HasValue)
             {
-                responseProductList = responseProductList.Where(x => x.is_egg == getProductModel.is_egg).ToList();
+                responseProductList = responseProductList.Where(x => x.TypeProduct.Value == getProductModel.TypeProduct.Value).ToList();
             }
             if (getProductModel.sex.HasValue)
             {
