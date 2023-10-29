@@ -35,7 +35,7 @@ namespace BirdSellingAPI._4._Core.Helper
                     new Claim (ClaimTypes.Role, userEntity.Role.role_name),
                 }),
                 IssuedAt = DateTime.Now,
-                Expires = DateTime.Now.AddSeconds(20),
+                Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes),
                 SecurityAlgorithms.HmacSha256Signature),
             };

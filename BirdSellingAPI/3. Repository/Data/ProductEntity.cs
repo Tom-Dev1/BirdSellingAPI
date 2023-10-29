@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using BirdSellingAPI._4._Core.EnumCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdSellingAPI._3._Repository.Data
 {
@@ -21,7 +22,7 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public string? bird_father_id { get; set; }
 
-        public bool? is_egg { get; set; }
+        public TypeProduct? TypeProduct { get; set; }
 
         public DateTimeOffset day_of_birth { get; set; }
         [ForeignKey(nameof(category_id))]
