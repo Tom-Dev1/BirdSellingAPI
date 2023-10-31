@@ -31,5 +31,13 @@ namespace BirdSellingAPI._1._Web
             var responseModel = _authService.SignIn(signIpModel);
             return Ok(responseModel);
         }
+
+        [HttpPut]
+        [Route("api/[controller]/Verify-Account")]
+        public IActionResult VerifyAccount(string username, string verifyKey)
+        {
+            var responseModel = _authService.VerifyEmail(username,verifyKey);
+            return Ok(responseModel);
+        }
     }
 }

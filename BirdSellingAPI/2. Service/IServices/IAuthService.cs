@@ -7,5 +7,9 @@ namespace BirdSellingAPI._2._Service.IServices
     {
         public ResponseModel SignUp(SignUpModel signUpModel);
         public ResponseModel SignIn(SignInModel signInModel);
+        public ResponseModel VerifyEmail(string username, string verifyKey);
+
+        //public ResponseModel ForgetPassword(SignInModel signInModel);
+
     }
 }

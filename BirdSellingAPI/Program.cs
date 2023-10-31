@@ -4,7 +4,9 @@ using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._3._Repository.Repository;
 using BirdSellingAPI._4._Core.Helper;
+using BirdSellingAPI._4._Core.Model.EmailSettingModel;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -37,7 +39,7 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
-
+EmailSettingModel.Instance = builder.Configuration.GetSection("EmailSettings").Get<EmailSettingModel>();
 // Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
@@ -63,6 +65,8 @@ builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IPromotionCategoryService, PromotionCategoryService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 
 //Auth

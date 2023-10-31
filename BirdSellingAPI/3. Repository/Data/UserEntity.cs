@@ -10,6 +10,7 @@ namespace BirdSellingAPI._3._Repository.Data
         public string? userPassword { get; set; }
 
         public string? userEmail { get; set; }
+        public string? VerifyEmail { get; set; }
 
         public string? userPhone { get; set; }
 
@@ -23,7 +24,7 @@ namespace BirdSellingAPI._3._Repository.Data
         [ForeignKey(nameof(role_id))]
         public RoleEntity Role {  get; set; }
 
-
+        public bool? isActive { get; set; }
 
     }
 }
