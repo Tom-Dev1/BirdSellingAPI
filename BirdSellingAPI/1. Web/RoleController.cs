@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BirdSellingAPI._1._Web
 {
-    [Route("api/[controller]")]
+
     [ApiController]
     public class RoleController : ControllerBase
     {

@@ -49,8 +49,10 @@ builder.Services.AddScoped<IRepositoryBase<PromotionEntity>, RepositoryBase<Prom
 builder.Services.AddScoped<IRepositoryBase<PromotionCategoryEntity>, RepositoryBase<PromotionCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<RoleEntity>, RepositoryBase<RoleEntity>>();
 builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
+
 builder.Services.AddScoped<IRepositoryBase<UserRefreshToken>, RepositoryBase<UserRefreshToken>>();
 
+builder.Services.AddScoped<IRepositoryBase<UserPaymentMenthodEntity>, RepositoryBase<UserPaymentMenthodEntity>>();
 
 
 
@@ -67,6 +69,9 @@ builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
 
+
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserPaymentMethodService, UserPaymentMethodService>();
 
 
 //Auth
