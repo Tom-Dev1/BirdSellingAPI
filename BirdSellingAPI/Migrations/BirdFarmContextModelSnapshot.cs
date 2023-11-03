@@ -143,6 +143,9 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<int?>("TypeProduct")
+                        .HasColumnType("int");
+
                     b.Property<string>("bird_father_id")
                         .HasColumnType("nvarchar(max)");
 
@@ -161,9 +164,6 @@ namespace BirdSellingAPI.Migrations
 
                     b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool?>("is_egg")
-                        .HasColumnType("bit");
 
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
