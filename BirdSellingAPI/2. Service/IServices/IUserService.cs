@@ -1,4 +1,5 @@
 ﻿using BirdSellingAPI._2._Service.Model;
+using BirdSellingAPI._4._Core.Model.User;
 
 namespace BirdSellingAPI._2._Service.IServices
 {
@@ -6,6 +7,7 @@ namespace BirdSellingAPI._2._Service.IServices
     {
         public ResponseModel GetAll();
         public ResponseModel GetSingle(string id);
-
+        public ResponseModel UpdateBirdCategory(string id, RequestUserModel requestUserModel);
+        public ResponseModel DeleteBirdCategory(string id);
     }
 }

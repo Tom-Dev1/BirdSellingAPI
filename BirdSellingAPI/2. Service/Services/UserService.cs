@@ -42,23 +42,43 @@ namespace BirdSellingAPI._2._Service.Services
                 StatusCode = StatusCodes.Status200OK
             };
         }
-        //public ResponseModel UpdateUser(string id, RequestUserModel requestUserModel)
-        //{
-        //    var userEntity = _userRepository.GetSingle(x => id.Equals(x.Id));
-        //    if (userEntity == null)
-        //    {
-        //        return new ResponseModel
-        //        {
-        //            MessageError = "Khong tim thay",
-        //            StatusCode = StatusCodes.Status404NotFound
-        //        };
-        //    }
-        //    _mapper.Map(RequestUserModel, userEntity);
-        //    _userRepository.Update(userEntity);
-        //    return new ResponseModel
-        //    {
-        //        StatusCode = StatusCodes.Status200OK
-        //    };
-        //}
+        //Update
+        public ResponseModel UpdateBirdCategory(string id, RequestUserModel requestUserModel)
+        {
+            var userEntity = _userRepository.GetSingle(x => id.Equals(x.Id));
+            if (userEntity == null)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Khong tim thay",
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+            }
+            _mapper.Map(requestUserModel, userEntity);
+            _userRepository.Update(userEntity);
+            return new ResponseModel
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+        //Delete bY ID
+        public ResponseModel DeleteBirdCategory(string id)
+        {
+            var userEntity = _userRepository.GetSingle(x => x.Id.Equals(id));
+            if (userEntity == null)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Khong tim thay",
+                    StatusCode = StatusCodes.Status404NotFound
+                };
+            }
+            _userRepository.Delete(userEntity);
+            return new ResponseModel
+            {
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
     }
 }
