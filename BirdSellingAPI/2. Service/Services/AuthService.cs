@@ -61,13 +61,13 @@ namespace BirdSellingAPI._2._Service.Services
                 };
             }
             _userRepository.Create(userEntity);
-            var sendEmailModel = new SendMailModel()
-            {
-                Content = "Code: " + userEntity.VerifyEmail,
-                ReceiveAddress = userEntity.userEmail,
-                Subject = "Verify Account",
-            };
-            _emailService.SendEmail(sendEmailModel);
+            //var sendEmailModel = new SendMailModel()
+            //{
+            //    Content = "Code: " + userEntity.VerifyEmail,
+            //    ReceiveAddress = userEntity.userEmail,
+            //    Subject = "Verify Account",
+            //};
+            //_emailService.SendEmail(sendEmailModel);
             return new ResponseModel
             {
                 Data = userEntity,

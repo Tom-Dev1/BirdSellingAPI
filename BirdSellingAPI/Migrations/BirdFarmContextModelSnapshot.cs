@@ -63,14 +63,14 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(38,4)");
 
                     b.Property<string>("product_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("quantity")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(38,4)");
 
                     b.Property<string>("user_id")
                         .IsRequired()

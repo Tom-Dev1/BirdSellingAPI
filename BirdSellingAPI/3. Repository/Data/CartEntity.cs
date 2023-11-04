@@ -13,9 +13,9 @@ namespace BirdSellingAPI._3._Repository.Data
         public ProductEntity Product { get; set; }
 
         public string? order_id { get; set; }
-
+        [Column(TypeName = "decimal(38,4)")]
         public decimal? price { get; set; }
-
+        [Column(TypeName = "decimal(38,4)")]
         public decimal? quantity { get; set; }
 
         public string user_id { get; set; }

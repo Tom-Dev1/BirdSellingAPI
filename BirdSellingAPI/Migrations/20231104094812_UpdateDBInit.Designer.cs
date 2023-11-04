@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdSellingAPI.Migrations
 {
     [DbContext(typeof(BirdFarmContext))]
-    [Migration("20231020181948_DBFix2")]
-    partial class DBFix2
+    [Migration("20231104094812_UpdateDBInit")]
+    partial class UpdateDBInit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,37 +24,6 @@ namespace BirdSellingAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.AddressEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AddressLine")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Region")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Address");
-                });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.BirdCategoryEntity", b =>
                 {
@@ -79,7 +48,7 @@ namespace BirdSellingAPI.Migrations
                     b.ToTable("BirdCategory");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.NestEntity", b =>
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.CartEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -93,40 +62,30 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("image")
+                    b.Property<string>("order_id")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal?>("price")
+                        .HasColumnType("decimal(38,4)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Nest");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.OrderDetail", b =>
-                {
-                    b.Property<string>("Id")
+                    b.Property<string>("product_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<decimal?>("quantity")
+                        .HasColumnType("decimal(38,4)");
 
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("nest_id")
+                    b.Property<string>("user_id")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("nest_id");
+                    b.HasIndex("product_id");
 
-                    b.ToTable("OrderDetail");
+                    b.HasIndex("user_id");
+
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.OrderEntity", b =>
@@ -143,15 +102,18 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<bool>("orderStatus")
-                        .HasColumnType("bit");
+                    b.Property<int?>("orderStatus")
+                        .HasColumnType("int");
 
                     b.Property<string>("orderTotal")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("order_date")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("paymentMenthod_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("shippingMenthod_id")
                         .IsRequired()
@@ -164,243 +126,7 @@ namespace BirdSellingAPI.Migrations
                     b.ToTable("Order");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.ProductEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("bird_father_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("bird_mother_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("category_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("day_of_birth")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("image")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("is_egg")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("sex")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("category_id");
-
-                    b.ToTable("Product");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.PromotionCategoryEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("PromotionEntityId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("birdCategory")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("promotionCategory")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("promotionCategory_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PromotionEntityId");
-
-                    b.ToTable("PromotionCategory");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.PromotionEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("end_day")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTimeOffset>("start_day")
-                        .HasColumnType("datetimeoffset");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Promotion");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.RoleEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("role_name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Role");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("address_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset?>("createdAt")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("role_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("userEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("userPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("address_id");
-
-                    b.HasIndex("role_id");
-
-                    b.ToTable("User");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserPaymentMenthodEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTimeOffset>("CreatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset?>("DeletedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<DateTimeOffset>("LastUpdatedTime")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("account_number")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("paymentType_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("provide")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("paymentType_id");
-
-                    b.ToTable("UserPaymentMenthod");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.paymentType", b =>
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.PaymentTypeEntity", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -423,6 +149,209 @@ namespace BirdSellingAPI.Migrations
                     b.ToTable("paymentType");
                 });
 
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.ProductEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("Discount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("LastUpdatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int?>("TypeProduct")
+                        .HasColumnType("int");
+
+                    b.Property<string>("bird_father_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("bird_mother_id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("category_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("day_of_birth")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(38,4)");
+
+                    b.Property<bool?>("sex")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("category_id");
+
+                    b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.RoleEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastUpdatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("role_name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
+                });
+
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AddressLine")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("CreatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastUpdatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("VerifyEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("createdAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<bool?>("isActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("role_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("userEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userPassword")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userPhone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("role_id");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserPaymentMenthodEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTimeOffset>("CreatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("LastUpdatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("account_number")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("paymentType_id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("provide")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("paymentType_id");
+
+                    b.ToTable("UserPaymentMenthod");
+                });
+
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserRefreshToken", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTimeOffset>("CreatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("DeletedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTime>("ExpireTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("JwtId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("LastUpdatedTime")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("isUsed")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("User_Id");
+
+                    b.ToTable("UserRefreshToken");
+                });
+
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.shippingMenthodEntity", b =>
                 {
                     b.Property<string>("Id")
@@ -438,7 +367,6 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -461,11 +389,9 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("comment")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rating_value")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -473,15 +399,23 @@ namespace BirdSellingAPI.Migrations
                     b.ToTable("UserReview");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.OrderDetail", b =>
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.CartEntity", b =>
                 {
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.NestEntity", "nest")
-                        .WithMany("orderDetail")
-                        .HasForeignKey("nest_id")
+                    b.HasOne("BirdSellingAPI._3._Repository.Data.ProductEntity", "Product")
+                        .WithMany("Carts")
+                        .HasForeignKey("product_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("nest");
+                    b.HasOne("BirdSellingAPI._3._Repository.Data.UserEntity", "User")
+                        .WithMany("Carts")
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.OrderEntity", b =>
@@ -506,21 +440,8 @@ namespace BirdSellingAPI.Migrations
                     b.Navigation("BirdCategory");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.PromotionCategoryEntity", b =>
-                {
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.PromotionEntity", null)
-                        .WithMany("PromotionCategory")
-                        .HasForeignKey("PromotionEntityId");
-                });
-
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserEntity", b =>
                 {
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.AddressEntity", "address")
-                        .WithMany()
-                        .HasForeignKey("address_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BirdSellingAPI._3._Repository.Data.RoleEntity", "Role")
                         .WithMany("UserEntities")
                         .HasForeignKey("role_id")
@@ -528,13 +449,11 @@ namespace BirdSellingAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-
-                    b.Navigation("address");
                 });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserPaymentMenthodEntity", b =>
                 {
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.paymentType", "paymentType")
+                    b.HasOne("BirdSellingAPI._3._Repository.Data.PaymentTypeEntity", "paymentType")
                         .WithMany("PaymentMenthod")
                         .HasForeignKey("paymentType_id")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -543,19 +462,30 @@ namespace BirdSellingAPI.Migrations
                     b.Navigation("paymentType");
                 });
 
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserRefreshToken", b =>
+                {
+                    b.HasOne("BirdSellingAPI._3._Repository.Data.UserEntity", "UserEntity")
+                        .WithMany()
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserEntity");
+                });
+
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.BirdCategoryEntity", b =>
                 {
                     b.Navigation("Products");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.NestEntity", b =>
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.PaymentTypeEntity", b =>
                 {
-                    b.Navigation("orderDetail");
+                    b.Navigation("PaymentMenthod");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.PromotionEntity", b =>
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.ProductEntity", b =>
                 {
-                    b.Navigation("PromotionCategory");
+                    b.Navigation("Carts");
                 });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.RoleEntity", b =>
@@ -563,9 +493,9 @@ namespace BirdSellingAPI.Migrations
                     b.Navigation("UserEntities");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.paymentType", b =>
+            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserEntity", b =>
                 {
-                    b.Navigation("PaymentMenthod");
+                    b.Navigation("Carts");
                 });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.shippingMenthodEntity", b =>
