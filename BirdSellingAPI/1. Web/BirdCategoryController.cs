@@ -34,7 +34,7 @@ namespace BirdSellingAPI._1._Web
         }
 
         [HttpGet]
-        //[Authorize(AuthenticationSchemes = "Bearer", Roles = ("Admin, Manager"))]
+        [Authorize(AuthenticationSchemes = "Bearer", Roles = ("Admin, Manager"))]
         [Route("api/[controller]/GetByName")]
         public IActionResult GetAllBirdCategory(string name)
         {

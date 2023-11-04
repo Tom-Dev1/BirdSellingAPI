@@ -2,7 +2,6 @@
 using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.Auth;
-using BirdSellingAPI._4._Core.Model.Nest;
 using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.OrderDetail;
 using BirdSellingAPI._4._Core.Model.PaymentType;
