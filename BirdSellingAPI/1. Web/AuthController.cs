@@ -15,7 +15,7 @@ namespace BirdSellingAPI._1._Web
         {
             _authService = authService;
         }
-        
+
         //[HttpPost]
         //[Route("api/[controller]/SignUpUser")]
         //public IActionResult CreateUser(SignUpModel signUpModel)
@@ -24,20 +24,20 @@ namespace BirdSellingAPI._1._Web
         //    return Ok(responseModel);
         //}
 
-        //[HttpPost]
-        //[Route("api/[controller]/SignInUser")]
-        //public IActionResult CreateUser(SignInModel signIpModel)
-        //{
-        //    var responseModel = _authService.SignIn(signIpModel);
-        //    return Ok(responseModel);
-        //}
+        [HttpPost]
+        [Route("api/[controller]/SignInUser")]
+        public IActionResult CreateUser(SignInModel signIpModel)
+        {
+            var responseModel = _authService.SignIn(signIpModel);
+            return Ok(responseModel);
+        }
 
-        //[HttpPut]
-        //[Route("api/[controller]/Verify-Account")]
-        //public IActionResult VerifyAccount(string username, string verifyKey)
-        //{
-        //    var responseModel = _authService.VerifyEmail(username,verifyKey);
-        //    return Ok(responseModel);
-        //}
+        [HttpPut]
+        [Route("api/[controller]/Verify-Account")]
+        public IActionResult VerifyAccount(string username, string verifyKey)
+        {
+            var responseModel = _authService.VerifyEmail(username, verifyKey);
+            return Ok(responseModel);
+        }
     }
 }
