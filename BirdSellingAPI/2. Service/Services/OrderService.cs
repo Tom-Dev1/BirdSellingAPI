@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using BirdSellingAPI._2._Service.IServices;
 using BirdSellingAPI._2._Service.Model;
-using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.Order;
-using BirdSellingAPI._4._Core.Model.User;
-
 namespace BirdSellingAPI._2._Service.Services
 {
     public class OrderService : IOrderService
@@ -20,13 +17,15 @@ namespace BirdSellingAPI._2._Service.Services
             _mapper = mapper;
         }
 
+
+        //getall
         public ResponseModel GetAll()
         {
             var orderEntity = _orderRepository.GetAll().ToList();
             var response = _mapper.Map<List<ResponseOrderModel>>(orderEntity.ToList());
             return new ResponseModel
             {
-                Data = orderEntity,
+                Data = response,
                 MessageError = "",
                 StatusCode = StatusCodes.Status200OK
             };

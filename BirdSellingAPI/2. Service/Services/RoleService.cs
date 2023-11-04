@@ -48,7 +48,7 @@ namespace BirdSellingAPI._2._Service.Services
         public ResponseModel GetAll()
         {
             var roleEntity = _roleRepository.GetAll().ToList();
-            var response = _mapper.Map<List<ResponseBirdCategoryModel>>(roleEntity.ToList());
+            var response = _mapper.Map<List<ResponseRoleModel>>(roleEntity.ToList());
             return new ResponseModel
             {
                 Data = response,
