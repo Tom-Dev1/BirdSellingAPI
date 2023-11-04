@@ -57,6 +57,7 @@ builder.Services.AddScoped<IRepositoryBase<CartEntity>, RepositoryBase<CartEntit
 builder.Services.AddScoped<IRepositoryBase<UserRefreshToken>, RepositoryBase<UserRefreshToken>>();
 
 builder.Services.AddScoped<IRepositoryBase<UserPaymentMenthodEntity>, RepositoryBase<UserPaymentMenthodEntity>>();
+builder.Services.AddScoped<IRepositoryBase<userReviewEntiry>, RepositoryBase<userReviewEntiry>>();
 
 
 
@@ -72,6 +73,8 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserPaymentMethodService, UserPaymentMethodService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IUserReviewModelService, UserReviewModelService>();
+
 
 
 
