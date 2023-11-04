@@ -13,8 +13,8 @@
 
         public DateTimeOffset createdAt { get; set; }
 
-        public string role_id;
+        public string role_id { get; set; }
 
-        public string address_id;
+        public string address_id { get; set; }
     }
 }

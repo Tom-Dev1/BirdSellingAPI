@@ -4,7 +4,7 @@ namespace BirdSellingAPI._4._Core.Model.Order
 {
     public class RequestOrderModel
     {
-        public string user_id;
+        public string user_id { get; set; }
 
         public DateTimeOffset order_date { get; set; }
 
