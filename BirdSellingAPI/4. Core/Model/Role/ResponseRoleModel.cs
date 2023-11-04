@@ -2,7 +2,7 @@
 {
     public class ResponseRoleModel
     {
-        public string Id { get; set; }
+        public string Id;
         public string role_name { get; set; }
     }
 }

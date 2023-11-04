@@ -2,7 +2,7 @@
 {
     public class ResponsePaymentTypeModel
     {
-        public string Id {  get; set; }
+        public string Id;
         public string name { get; set; }
 
     }

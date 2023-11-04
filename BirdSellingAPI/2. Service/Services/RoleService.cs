@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using BirdSellingAPI._2._Service.IServices;
 using BirdSellingAPI._2._Service.Model;
-using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.Role;
@@ -40,18 +39,6 @@ namespace BirdSellingAPI._2._Service.Services
             return new ResponseModel
             {
                 Data = roleEntity,
-                MessageError = "",
-                StatusCode = StatusCodes.Status200OK
-            };
-        }
-        //Get ALL
-        public ResponseModel GetAll()
-        {
-            var roleEntity = _roleRepository.GetAll().ToList();
-            var response = _mapper.Map<List<ResponseBirdCategoryModel>>(roleEntity.ToList());
-            return new ResponseModel
-            {
-                Data = response,
                 MessageError = "",
                 StatusCode = StatusCodes.Status200OK
             };
