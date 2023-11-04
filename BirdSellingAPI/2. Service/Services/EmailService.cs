@@ -32,9 +32,9 @@ namespace BirdSellingAPI._2._Service.Services
                 smtp.Credentials = network;
                 smtp.Send(message);
             }
-            catch (Exception ex) 
+            catch
             {
-                throw new Exception();
+                throw;
             }
 
         }

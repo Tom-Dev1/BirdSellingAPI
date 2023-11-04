@@ -2,7 +2,7 @@
 {
     public class ResponseBirdCategoryModel
     {
-        public string Id;
+        public string Id { get; set; }
         public string category_name { get; set; }
     }
 }

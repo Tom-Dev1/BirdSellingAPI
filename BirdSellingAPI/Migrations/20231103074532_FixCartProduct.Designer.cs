@@ -4,6 +4,7 @@ using BirdSellingAPI._3._Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdSellingAPI.Migrations
 {
     [DbContext(typeof(BirdFarmContext))]
-    partial class BirdFarmContextModelSnapshot : ModelSnapshot
+    [Migration("20231103074532_FixCartProduct")]
+    partial class FixCartProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,28 +62,7 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("order_id")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("product_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal?>("quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("user_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("product_id");
-
-                    b.HasIndex("user_id");
 
                     b.ToTable("Cart");
                 });
@@ -107,10 +89,6 @@ namespace BirdSellingAPI.Migrations
 
                     b.Property<DateTimeOffset>("order_date")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("paymentMenthod_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("shippingMenthod_id")
                         .IsRequired()
@@ -396,25 +374,6 @@ namespace BirdSellingAPI.Migrations
                     b.ToTable("UserReview");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.CartEntity", b =>
-                {
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.ProductEntity", "Product")
-                        .WithMany("Carts")
-                        .HasForeignKey("product_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.UserEntity", "User")
-                        .WithMany("Carts")
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.OrderEntity", b =>
                 {
                     b.HasOne("BirdSellingAPI._3._Repository.Data.shippingMenthodEntity", "shippingMenthodEntity")
@@ -480,19 +439,9 @@ namespace BirdSellingAPI.Migrations
                     b.Navigation("PaymentMenthod");
                 });
 
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.ProductEntity", b =>
-                {
-                    b.Navigation("Carts");
-                });
-
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.RoleEntity", b =>
                 {
                     b.Navigation("UserEntities");
-                });
-
-            modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserEntity", b =>
-                {
-                    b.Navigation("Carts");
                 });
 
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.shippingMenthodEntity", b =>

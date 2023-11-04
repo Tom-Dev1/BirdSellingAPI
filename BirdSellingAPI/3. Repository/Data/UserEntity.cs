@@ -25,6 +25,6 @@ namespace BirdSellingAPI._3._Repository.Data
         public RoleEntity Role {  get; set; }
 
         public bool? isActive { get; set; }
-
+        public virtual ICollection<CartEntity> Carts { get; set; }
     }
 }

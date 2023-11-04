@@ -21,6 +21,7 @@ namespace BirdSellingAPI._3._Repository.Data
         public string? bird_mother_id { get; set; }
 
         public string? bird_father_id { get; set; }
+        public int? Discount { get; set; }
 
         public TypeProduct? TypeProduct { get; set; }
 
@@ -28,5 +29,6 @@ namespace BirdSellingAPI._3._Repository.Data
         [ForeignKey(nameof(category_id))]
         public BirdCategoryEntity BirdCategory { get; set; }
 
+        public virtual ICollection<CartEntity> Carts { get; set; }
     }
 }

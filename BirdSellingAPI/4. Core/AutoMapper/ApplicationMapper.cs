@@ -7,8 +7,6 @@ using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.OrderDetail;
 using BirdSellingAPI._4._Core.Model.PaymentType;
 using BirdSellingAPI._4._Core.Model.Product;
-using BirdSellingAPI._4._Core.Model.Promotion;
-using BirdSellingAPI._4._Core.Model.PromotionCategory;
 using BirdSellingAPI._4._Core.Model.Role;
 using BirdSellingAPI._4._Core.Model.ShippingMenthod;
 using BirdSellingAPI._4._Core.Model.User;
@@ -19,7 +17,7 @@ namespace CarCategoriesApi.Helpers
 {
     public class ApplicationMapper : Profile
     {
-        public ApplicationMapper() 
+        public ApplicationMapper()
         {
             //BirdCategory
             CreateMap<BirdCategoryEntity, RequestBirdCategoryModel>().ReverseMap();
@@ -30,29 +28,17 @@ namespace CarCategoriesApi.Helpers
             CreateMap<ProductEntity, ResponseProductModel>().ReverseMap();
 
 
-            //Nest
-            CreateMap<NestEntity, RequestNestModel>().ReverseMap();
-            CreateMap<NestEntity, ResponseNestModel>().ReverseMap();
-
             //Order
             CreateMap<OrderEntity, RequestOrderModel>().ReverseMap();
             CreateMap<OrderEntity, ResponseOrderModel>().ReverseMap();
 
             //OrderDetail
-            CreateMap<OrderDetailEntity, RequestOrderDetailModel>().ReverseMap();
-            CreateMap<OrderDetailEntity, ResponseOrderDetailModel>().ReverseMap();
+            CreateMap<CartEntity, RequestCartModel>().ReverseMap();
+            CreateMap<CartEntity, ResponseCartModel>().ReverseMap();
 
             //PaymentType
             CreateMap<PaymentTypeEntity, RequestPaymentTypeModel>().ReverseMap();
             CreateMap<PaymentTypeEntity, ResponsePaymentTypeModel>().ReverseMap();
-
-            //Promotion
-            CreateMap<PromotionEntity, RequestPromotionModel>().ReverseMap();
-            CreateMap<PromotionEntity, ResponsePromotionModel>().ReverseMap();
-
-            //Promotion Category
-            CreateMap<PromotionCategoryEntity, RequestPromotionCategoryModel>().ReverseMap();
-            CreateMap<PromotionCategoryEntity, ResponsePromotionCategoryModel>().ReverseMap();
 
             //Role
             CreateMap<RoleEntity, RequestRoleModel>().ReverseMap();
@@ -74,9 +60,10 @@ namespace CarCategoriesApi.Helpers
             CreateMap<userReviewEntiry, RequestUserReviewModel>().ReverseMap();
             CreateMap<userReviewEntiry, ResponseUserReviewModel>().ReverseMap();
 
-            //User Review
+            //User Auth
             CreateMap<UserEntity, SignUpModel>().ReverseMap();
             CreateMap<UserEntity, SignInModel>().ReverseMap();
+
         }
     }
 }

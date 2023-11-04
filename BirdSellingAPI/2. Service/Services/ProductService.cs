@@ -22,6 +22,22 @@ namespace BirdSellingAPI._2._Service.Services
         public ResponseModel CreateProduct(RequestProductModel requestProductModel)
         {
             var entity = _mapper.Map<ProductEntity>(requestProductModel);
+            if (entity == null)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Loi khong tao duoc san pham",
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
+            if (entity.Discount > 100 || entity.Discount < 0)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Discount không được nhỏ hơn 0% và lớn hơn 100%",
+                    StatusCode = StatusCodes.Status400BadRequest
+                };
+            }
             _productRepository.Create(entity);
             return new ResponseModel
             {

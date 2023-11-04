@@ -34,7 +34,8 @@ namespace BirdSellingAPI._2._Service.Services
         //Get ALL
         public ResponseModel GetAll()
         {
-            var response = _birdCategoryRepository.GetAll();
+            var entities = _birdCategoryRepository.GetAll().ToList();
+            var response = _mapper.Map<List<ResponseBirdCategoryModel>>(entities.ToList());
             return new ResponseModel
             {
                 Data = response,

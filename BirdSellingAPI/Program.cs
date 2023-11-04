@@ -18,7 +18,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddCors(opts =>
+{
+    opts.AddPolicy("corspolicy", build =>
+    {
+        build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    });
+});
 builder.Services.AddDbContext<BirdFarmContext> (options => 
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarm"));
@@ -43,12 +49,10 @@ EmailSettingModel.Instance = builder.Configuration.GetSection("EmailSettings").G
 // Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
-builder.Services.AddScoped<IRepositoryBase<NestEntity>, RepositoryBase<NestEntity>>();
 builder.Services.AddScoped<IRepositoryBase<PaymentTypeEntity>, RepositoryBase<PaymentTypeEntity>>();
-builder.Services.AddScoped<IRepositoryBase<PromotionEntity>, RepositoryBase<PromotionEntity>>();
-builder.Services.AddScoped<IRepositoryBase<PromotionCategoryEntity>, RepositoryBase<PromotionCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<RoleEntity>, RepositoryBase<RoleEntity>>();
 builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
+builder.Services.AddScoped<IRepositoryBase<CartEntity>, RepositoryBase<CartEntity>>();
 
 builder.Services.AddScoped<IRepositoryBase<UserRefreshToken>, RepositoryBase<UserRefreshToken>>();
 
@@ -61,17 +65,14 @@ builder.Services.AddScoped<IRepositoryBase<UserPaymentMenthodEntity>, Repository
 //Service
 builder.Services.AddScoped<IBirdCategoryService, BirdCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<INestService, NestService>();
 builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
-builder.Services.AddScoped<IPromotionService, PromotionService>();
-builder.Services.AddScoped<IPromotionCategoryService, PromotionCategoryService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
-
-
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserPaymentMethodService, UserPaymentMethodService>();
+builder.Services.AddScoped<ICartService, CartService>();
+
 
 
 //Auth
@@ -85,6 +86,7 @@ if (app.Environment.IsDevelopment())
 }
 app.UseSwagger();
 app.UseSwaggerUI();
+app.UseCors("corspolicy");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

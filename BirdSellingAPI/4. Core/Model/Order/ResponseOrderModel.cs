@@ -1,4 +1,6 @@
-﻿namespace BirdSellingAPI._4._Core.Model.Order
+﻿using BirdSellingAPI._4._Core.EnumCore;
+
+namespace BirdSellingAPI._4._Core.Model.Order
 {
     public class ResponseOrderModel
     {
@@ -14,6 +16,6 @@
 
         public string? orderTotal { get; set; }
 
-        public bool? orderStatus { get; set; }
+        public OrderStatus? orderStatus { get; set; }
     }
 }
