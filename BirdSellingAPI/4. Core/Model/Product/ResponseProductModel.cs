@@ -22,7 +22,7 @@ namespace BirdSellingAPI._4._Core.Model.Product
         public string bird_father_id { get; set; }
         public StatusProduct statusProduct { get; set; }
         public int? Discount { get; set; }
-        public bool is_egg { get; set; }
+        public TypeProduct? TypeProduct { get; set; }
         public DateTimeOffset day_of_birth { get; set; }
     }
 }

@@ -11,17 +11,15 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public DateTimeOffset order_date {  get; set; }
 
-        public string paymentMenthod_id { get; set; }
-
-        public string shippingMenthod_id { get; set; }
+        public string? paymentMenthod_id { get; set; }
 
         public string? orderTotal {  get; set; }
 
         public OrderStatus? orderStatus {  get; set; }
+        public string Address { get; set; }
 
-
-        [ForeignKey(nameof(shippingMenthod_id))]
-        public shippingMenthodEntity shippingMenthodEntity { get; set; }
+        [ForeignKey(nameof(paymentMenthod_id))]
+        public UserPaymentMenthodEntity paymentMenthod { get; set; }
 
     }
 }

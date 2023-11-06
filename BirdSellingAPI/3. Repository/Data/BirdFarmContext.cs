@@ -21,9 +21,7 @@ namespace BirdSellingAPI._3._Repository.Data
         public DbSet<ProductEntity> productEntities { get; set; }
         public DbSet<CartEntity> cartEntities { get; set; }
         public DbSet<OrderEntity> orderEntities { get; set; }
-        public DbSet<PaymentTypeEntity> paymentTypes { get; set; }
         public DbSet<RoleEntity> roleEntities { get; set; }
-        public DbSet<shippingMenthodEntity> shippingMenthodEntities { get; set; }
         public DbSet<UserEntity> userEntities { get; set; }
         public DbSet<UserPaymentMenthodEntity> userPaymentMenthodEntities { get; set; }
         public DbSet<userReviewEntiry> userReviewEntiries { get; set; }
