@@ -4,10 +4,8 @@ using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.Auth;
 using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.OrderDetail;
-using BirdSellingAPI._4._Core.Model.PaymentType;
 using BirdSellingAPI._4._Core.Model.Product;
 using BirdSellingAPI._4._Core.Model.Role;
-using BirdSellingAPI._4._Core.Model.ShippingMenthod;
 using BirdSellingAPI._4._Core.Model.User;
 using BirdSellingAPI._4._Core.Model.UserPaymentMenthod;
 using BirdSellingAPI._4._Core.Model.UserReview;
@@ -35,17 +33,11 @@ namespace CarCategoriesApi.Helpers
             CreateMap<CartEntity, RequestCartModel>().ReverseMap();
             CreateMap<CartEntity, ResponseCartModel>().ReverseMap();
 
-            //PaymentType
-            CreateMap<PaymentTypeEntity, RequestPaymentTypeModel>().ReverseMap();
-            CreateMap<PaymentTypeEntity, ResponsePaymentTypeModel>().ReverseMap();
 
             //Role
             CreateMap<RoleEntity, RequestRoleModel>().ReverseMap();
             CreateMap<RoleEntity, ResponseRoleModel>().ReverseMap();
 
-            //ShippingMenthod
-            CreateMap<shippingMenthodEntity, RequestShippingMenthodModel>().ReverseMap();
-            CreateMap<shippingMenthodEntity, ResponseShippingMenthodModel>().ReverseMap();
 
             //User
             CreateMap<UserEntity, RequestUserModel>().ReverseMap();

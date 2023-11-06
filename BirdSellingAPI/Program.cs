@@ -49,7 +49,6 @@ EmailSettingModel.Instance = builder.Configuration.GetSection("EmailSettings").G
 // Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
-builder.Services.AddScoped<IRepositoryBase<PaymentTypeEntity>, RepositoryBase<PaymentTypeEntity>>();
 builder.Services.AddScoped<IRepositoryBase<RoleEntity>, RepositoryBase<RoleEntity>>();
 builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
 builder.Services.AddScoped<IRepositoryBase<CartEntity>, RepositoryBase<CartEntity>>();
@@ -65,7 +64,6 @@ builder.Services.AddScoped<IRepositoryBase<UserPaymentMenthodEntity>, Repository
 //Service
 builder.Services.AddScoped<IBirdCategoryService, BirdCategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IPaymentTypeService, PaymentTypeService>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
