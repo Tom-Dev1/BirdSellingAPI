@@ -5,5 +5,6 @@
         ChuaBan = 1,
         DaBan = 2,
         DaXoa = 3,
+        KhongNhanHang = 4,
     }
 }
