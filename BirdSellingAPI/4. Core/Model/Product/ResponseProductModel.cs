@@ -1,4 +1,6 @@
-﻿namespace BirdSellingAPI._4._Core.Model.Product
+﻿using BirdSellingAPI._4._Core.EnumCore;
+
+namespace BirdSellingAPI._4._Core.Model.Product
 {
     public class ResponseProductModel
     {
@@ -18,6 +20,7 @@
         public string bird_mother_id { get; set; }
 
         public string bird_father_id { get; set; }
+        public StatusProduct statusProduct { get; set; }
         public int? Discount { get; set; }
         public bool is_egg { get; set; }
         public DateTimeOffset day_of_birth { get; set; }

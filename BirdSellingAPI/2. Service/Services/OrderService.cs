@@ -20,6 +20,11 @@ namespace BirdSellingAPI._2._Service.Services
             _mapper = mapper;
         }
 
+        public ResponseModel CreateOrder(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public ResponseModel GetAll()
         {
             var orderEntity = _orderRepository.GetAll().ToList();
