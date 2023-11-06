@@ -11,7 +11,7 @@ namespace BirdSellingAPI._4._Core.Model.Product
         public TypeProduct? TypeProduct { get; set; }
         public decimal? priceFrom { get; set; }
         public decimal? priceTo { get; set; }
-        
+        public StatusProduct statusProduct { get; set; }
         public GetProductModel()
         {
             name = "";

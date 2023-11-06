@@ -24,16 +24,30 @@ namespace BirdSellingAPI._2._Service.Services
         public ResponseModel AddProductToCart(RequestCartModel requestCartModel)
         {
             var cartEntity = _mapper.Map<CartEntity>(requestCartModel);
-            var productEntity = _productRepository.GetSingle(x => x.Id == cartEntity.product_id);
-            cartEntity.price = productEntity.price * ( (100 - productEntity.Discount) / 100);
-            if (cartEntity == null)
+            //kiểm tra xem đã add sản phẩm vào chưa
+            var ExistedProductInCart = _CartRepository.GetSingle(x => x.product_id == cartEntity.product_id
+            && x.user_id == requestCartModel.user_id);
+
+            if (ExistedProductInCart != null)
             {
                 return new ResponseModel
                 {
-                    MessageError = "Loi khong them duoc san pham vao gio hang",
+                    MessageError = "Sản phẩm đã được thêm vào giỏ hàng",
+                };
+            }
+
+            var productEntity = _productRepository.GetSingle(x => x.Id == cartEntity.product_id);
+            if (productEntity.statusProduct == _4._Core.EnumCore.StatusProduct.DaBan ||
+                productEntity.statusProduct == _4._Core.EnumCore.StatusProduct.DaXoa)
+            {
+                return new ResponseModel
+                {
+                    MessageError = "Sản phẩm không tồn tại",
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
+            cartEntity.price = productEntity.price * ((100 - productEntity.Discount) / 100);
+            cartEntity.quantity = 1;
             _CartRepository.Create(cartEntity);
             return new ResponseModel
             {

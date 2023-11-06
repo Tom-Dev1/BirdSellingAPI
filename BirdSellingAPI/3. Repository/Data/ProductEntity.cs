@@ -24,6 +24,7 @@ namespace BirdSellingAPI._3._Repository.Data
         public int? Discount { get; set; }
 
         public TypeProduct? TypeProduct { get; set; }
+        public StatusProduct statusProduct { get; set; }
 
         public DateTimeOffset day_of_birth { get; set; }
         [ForeignKey(nameof(category_id))]
