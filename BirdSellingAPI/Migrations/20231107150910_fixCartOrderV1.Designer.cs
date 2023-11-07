@@ -4,6 +4,7 @@ using BirdSellingAPI._3._Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdSellingAPI.Migrations
 {
     [DbContext(typeof(BirdFarmContext))]
-    partial class BirdFarmContextModelSnapshot : ModelSnapshot
+    [Migration("20231107150910_fixCartOrderV1")]
+    partial class fixCartOrderV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,6 +63,7 @@ namespace BirdSellingAPI.Migrations
                         .HasColumnType("datetimeoffset");
 
                     b.Property<string>("order_id")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal?>("price")
@@ -111,8 +115,8 @@ namespace BirdSellingAPI.Migrations
                     b.Property<int?>("orderStatus")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("orderTotal")
-                        .HasColumnType("decimal(38,4)");
+                    b.Property<string>("orderTotal")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTimeOffset>("order_date")
                         .HasColumnType("datetimeoffset");
@@ -120,17 +124,11 @@ namespace BirdSellingAPI.Migrations
                     b.Property<string>("paymentMenthod_id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("user_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("OrderEntityId");
 
                     b.HasIndex("paymentMenthod_id");
-
-                    b.HasIndex("user_id");
 
                     b.ToTable("Order");
                 });
@@ -221,7 +219,7 @@ namespace BirdSellingAPI.Migrations
                     b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("price")
+                    b.Property<decimal>("price")
                         .HasColumnType("decimal(38,4)");
 
                     b.Property<bool?>("sex")
@@ -387,18 +385,10 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<string>("bird_id")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("comment")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("rating_value")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("user_id")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -410,7 +400,9 @@ namespace BirdSellingAPI.Migrations
                 {
                     b.HasOne("BirdSellingAPI._3._Repository.Data.OrderEntity", "Order")
                         .WithMany()
-                        .HasForeignKey("order_id");
+                        .HasForeignKey("order_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BirdSellingAPI._3._Repository.Data.ProductEntity", "Product")
                         .WithMany("Carts")
@@ -440,14 +432,6 @@ namespace BirdSellingAPI.Migrations
                     b.HasOne("BirdSellingAPI._3._Repository.Data.UserPaymentMenthodEntity", "paymentMenthod")
                         .WithMany()
                         .HasForeignKey("paymentMenthod_id");
-
-                    b.HasOne("BirdSellingAPI._3._Repository.Data.UserEntity", "User")
-                        .WithMany("OrderEntities")
-                        .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
 
                     b.Navigation("paymentMenthod");
                 });
@@ -508,8 +492,6 @@ namespace BirdSellingAPI.Migrations
             modelBuilder.Entity("BirdSellingAPI._3._Repository.Data.UserEntity", b =>
                 {
                     b.Navigation("Carts");
-
-                    b.Navigation("OrderEntities");
                 });
 #pragma warning restore 612, 618
         }

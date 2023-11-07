@@ -2,7 +2,7 @@
 {
     public class ResponseUserPaymentModel
     {
-        public string Id;
+        public string Id { get; set; }
         public string name { get; set; }
     }
 }

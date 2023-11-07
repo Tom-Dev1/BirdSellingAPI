@@ -5,6 +5,7 @@ using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.OrderDetail;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 namespace BirdSellingAPI._2._Service.Services
 {
@@ -46,8 +47,9 @@ namespace BirdSellingAPI._2._Service.Services
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
-            cartEntity.price = productEntity.price * ((100 - productEntity.Discount) / 100);
+            cartEntity.price = productEntity.price * (((decimal)100 - productEntity.Discount) / 100);
             cartEntity.quantity = 1;
+            cartEntity.order_id = null;
             _CartRepository.Create(cartEntity);
             return new ResponseModel
             {
@@ -63,7 +65,7 @@ namespace BirdSellingAPI._2._Service.Services
 
         public ResponseModel GetAllCart()
         {
-            var cartEntity = _CartRepository.Get(null, x => x.Product).ToList();
+            var cartEntity = _CartRepository.Get(x => x.order_id == null, x => x.Product);
             var cartResponseModel = _mapper.Map<List<ResponseCartModel>>(cartEntity.ToList());
             return new ResponseModel
             {
