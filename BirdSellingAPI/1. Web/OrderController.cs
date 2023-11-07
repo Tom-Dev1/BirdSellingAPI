@@ -1,5 +1,6 @@
 ﻿using BirdSellingAPI._2._Service.IServices;
 using BirdSellingAPI._2._Service.Services;
+using BirdSellingAPI._4._Core.Model.Order;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,5 +33,15 @@ namespace BirdSellingAPI._1._Web
             return Ok(responseModel);
 
         }
+
+        [HttpPost]
+        [Route("api/[controller]/Create-Order")]
+        public IActionResult CreateOrder(RequestOrderModel requestOrderModel)
+        {
+            var responseModel = _orderService.CreateOrder(requestOrderModel);
+            return Ok(responseModel);
+
+        }
+
     }
 }

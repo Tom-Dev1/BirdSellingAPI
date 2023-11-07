@@ -5,6 +5,7 @@
         ChoXacNhan = 1,
         DaXacNhan = 2,
         DangVanChuyen = 3,
-        DaThanhToan = 4
+        DaThanhToan = 4,
+        HuyDon = 5
     }
 }

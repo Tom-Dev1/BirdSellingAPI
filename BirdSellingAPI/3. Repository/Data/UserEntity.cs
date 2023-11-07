@@ -16,7 +16,7 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public DateTimeOffset? createdAt { get; set; }
 
-        public string role_id;
+        public string role_id { get; set; }
 
         public string? AddressLine { get; set; }
 
@@ -26,5 +26,6 @@ namespace BirdSellingAPI._3._Repository.Data
 
         public bool? isActive { get; set; }
         public virtual ICollection<CartEntity> Carts { get; set; }
+        public virtual ICollection<OrderEntity> OrderEntities { get; set; }
     }
 }

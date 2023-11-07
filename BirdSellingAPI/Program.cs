@@ -18,6 +18,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add Cors
 builder.Services.AddCors(opts =>
 {
     opts.AddPolicy("corspolicy", build =>
@@ -25,11 +27,17 @@ builder.Services.AddCors(opts =>
         build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
     });
 });
+
+//DB SQL Server
 builder.Services.AddDbContext<BirdFarmContext> (options => 
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("BirdFarm"));
 });
+
+//AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
+
+//Authentication
 builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
 {
     options.SaveToken = true;
@@ -45,14 +53,18 @@ builder.Services.AddAuthentication("Bearer").AddJwtBearer(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+
+//Email
 EmailSettingModel.Instance = builder.Configuration.GetSection("EmailSettings").Get<EmailSettingModel>();
+
 // Repository
 builder.Services.AddScoped<IRepositoryBase<BirdCategoryEntity>, RepositoryBase<BirdCategoryEntity>>();
 builder.Services.AddScoped<IRepositoryBase<ProductEntity>, RepositoryBase<ProductEntity>>();
 builder.Services.AddScoped<IRepositoryBase<RoleEntity>, RepositoryBase<RoleEntity>>();
 builder.Services.AddScoped<IRepositoryBase<UserEntity>, RepositoryBase<UserEntity>>();
 builder.Services.AddScoped<IRepositoryBase<CartEntity>, RepositoryBase<CartEntity>>();
-
+builder.Services.AddScoped<IRepositoryBase<OrderEntity>, RepositoryBase<OrderEntity>>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IRepositoryBase<UserRefreshToken>, RepositoryBase<UserRefreshToken>>();
 
 builder.Services.AddScoped<IRepositoryBase<UserPaymentMenthodEntity>, RepositoryBase<UserPaymentMenthodEntity>>();
@@ -70,6 +82,7 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserPaymentMethodService, UserPaymentMethodService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 
 

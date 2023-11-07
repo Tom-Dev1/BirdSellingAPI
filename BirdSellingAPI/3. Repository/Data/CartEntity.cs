@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace BirdSellingAPI._3._Repository.Data
 {
@@ -12,9 +13,14 @@ namespace BirdSellingAPI._3._Repository.Data
         [ForeignKey(nameof(product_id))]
         public ProductEntity Product { get; set; }
 
+        [AllowNull]
         public string? order_id { get; set; }
+        [ForeignKey(nameof(order_id))]
+        public virtual OrderEntity Order { get; set; }
+
         [Column(TypeName = "decimal(38,4)")]
         public decimal? price { get; set; }
+
         [Column(TypeName = "decimal(38,4)")]
         public decimal? quantity { get; set; }
 
