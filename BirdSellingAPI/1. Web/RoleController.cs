@@ -1,4 +1,5 @@
 ﻿using BirdSellingAPI._2._Service.IServices;
+using BirdSellingAPI._2._Service.Services;
 using BirdSellingAPI._4._Core.Model.Role;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,6 +23,15 @@ namespace BirdSellingAPI._1._Web
         {
             var responseModel = _roleService.CreateRole(requestRoleModel);
             return Ok(responseModel);
+
+        }
+        //Get ALL
+        [HttpGet]
+        [Route("api/[controller]/GetAllRole")]
+        public IActionResult GetAllRole()
+        {
+            var responseModel = _roleService.GetAll();
+            return Ok(responseModel);
         }
         //Get
         [HttpGet]
@@ -32,6 +42,7 @@ namespace BirdSellingAPI._1._Web
             return Ok(responseModel);
 
         }
+
         //Update
         [HttpPut]
         [Route("api/[controller]/UpdateRole")]

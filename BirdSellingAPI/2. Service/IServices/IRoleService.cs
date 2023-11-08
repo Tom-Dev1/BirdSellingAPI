@@ -6,8 +6,8 @@ namespace BirdSellingAPI._2._Service.IServices
     public interface IRoleService
     {
         public ResponseModel CreateRole(RequestRoleModel entity);
+        public ResponseModel GetAll();
         public ResponseModel GetRoleID(string id);
-
         public ResponseModel UpdateRole(string id, RequestRoleModel requestRoleModel);
         public ResponseModel DeleteRole(string id);
 
