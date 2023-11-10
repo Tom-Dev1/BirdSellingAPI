@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'BirdSellingAPI'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1234 }}
           package: .
