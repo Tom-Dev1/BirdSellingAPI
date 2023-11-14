@@ -37,18 +37,18 @@ namespace BirdSellingAPI._1._Web
         }
         // Update 
         [HttpPut]
-        [Route("api/[controller]/UpdateProduct")]
-        public IActionResult UpdateProduct(string id, RequestUserModel requestUserModel)
+        [Route("api/[controller]/UpdateUser")]
+        public IActionResult UpdateUser(string id, RequestUserModel requestUserModel)
         {
-            var responseModel = _userService.UpdateBirdCategory(id, requestUserModel);
+            var responseModel = _userService.UpdateUser(id, requestUserModel);
             return Ok(responseModel);
         }
 
         [HttpDelete]
-        [Route("api/[controller]/DeleteProduct")]
-        public IActionResult DeleteBirdCategory(string id)
+        [Route("api/[controller]/DeleteUser")]
+        public IActionResult DeleteUser(string id)
         {
-            var responseModel = _userService.DeleteBirdCategory(id);
+            var responseModel = _userService.DeleteUser(id);
             return Ok(responseModel);
         }
 

@@ -7,7 +7,7 @@ namespace BirdSellingAPI._2._Service.IServices
     {
         public ResponseModel GetAll();
         public ResponseModel GetSingle(string id);
-        public ResponseModel UpdateBirdCategory(string id, RequestUserModel requestUserModel);
-        public ResponseModel DeleteBirdCategory(string id);
+        public ResponseModel UpdateUser(string id, RequestUserModel requestUserModel);
+        public ResponseModel DeleteUser(string id);
     }
 }

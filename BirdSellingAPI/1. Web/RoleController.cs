@@ -16,15 +16,15 @@ namespace BirdSellingAPI._1._Web
         {
             _roleService = roleService;
         }
-        //Create
-        [HttpPost]
-        [Route("api/[controller]/CreateRole")]
-        public IActionResult CreateRole(RequestRoleModel requestRoleModel)
-        {
-            var responseModel = _roleService.CreateRole(requestRoleModel);
-            return Ok(responseModel);
+        ////Create
+        //[HttpPost]
+        //[Route("api/[controller]/CreateRole")]
+        //public IActionResult CreateRole(RequestRoleModel requestRoleModel)
+        //{
+        //    var responseModel = _roleService.CreateRole(requestRoleModel);
+        //    return Ok(responseModel);
 
-        }
+        //}
         //Get ALL
         [HttpGet]
         [Route("api/[controller]/GetAllRole")]
@@ -44,20 +44,20 @@ namespace BirdSellingAPI._1._Web
         }
 
         //Update
-        [HttpPut]
-        [Route("api/[controller]/UpdateRole")]
-        public IActionResult UpdateRole(string id, RequestRoleModel requestRoleModel)
-        {
-            var responseModel = _roleService.UpdateRole(id, requestRoleModel);
-            return Ok(responseModel);
-        }
+        //[HttpPut]
+        //[Route("api/[controller]/UpdateRole")]
+        //public IActionResult UpdateRole(string id, RequestRoleModel requestRoleModel)
+        //{
+        //    var responseModel = _roleService.UpdateRole(id, requestRoleModel);
+        //    return Ok(responseModel);
+        //}
 
-        [HttpDelete]
-        [Route("api/[controller]/DeleteRole")]
-        public IActionResult DeleteRole(string id)
-        {
-            var responseModel = _roleService.DeleteRole(id);
-            return Ok(responseModel);
-        }
+        //[HttpDelete]
+        //[Route("api/[controller]/DeleteRole")]
+        //public IActionResult DeleteRole(string id)
+        //{
+        //    var responseModel = _roleService.DeleteRole(id);
+        //    return Ok(responseModel);
+        //}
     }
 }

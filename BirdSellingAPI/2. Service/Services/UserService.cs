@@ -43,7 +43,7 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
         //Update
-        public ResponseModel UpdateBirdCategory(string id, RequestUserModel requestUserModel)
+        public ResponseModel UpdateUser(string id, RequestUserModel requestUserModel)
         {
             var userEntity = _userRepository.GetSingle(x => id.Equals(x.Id));
             if (userEntity == null)
@@ -62,7 +62,7 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
         //Delete bY ID
-        public ResponseModel DeleteBirdCategory(string id)
+        public ResponseModel DeleteUser(string id)
         {
             var userEntity = _userRepository.GetSingle(x => x.Id.Equals(id));
             if (userEntity == null)

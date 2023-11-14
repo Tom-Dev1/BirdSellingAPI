@@ -14,7 +14,6 @@
         public DateTimeOffset createdAt { get; set; }
 
         public string role_id { get; set; }
-
-        public string address_id { get; set; }
+        public string? AddressLine { get; set; }
     }
 }
