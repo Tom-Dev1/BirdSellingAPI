@@ -6,6 +6,7 @@ using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._3._Repository.Repository;
+using BirdSellingAPI._4._Core.EnumCore;
 using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.User;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
@@ -95,11 +96,11 @@ namespace BirdSellingAPI._2._Service.Services
 
         public ResponseModel GetAll()
         {
-            var orderEntity = _orderRepository.GetAll().ToList();
+            var orderEntity = _orderRepository.Get(null, x => x.User).ToList();
             var response = _mapper.Map<List<ResponseOrderModel>>(orderEntity.ToList());
             return new ResponseModel
             {
-                Data = orderEntity,
+                Data = response,
                 MessageError = "",
                 StatusCode = StatusCodes.Status200OK
             };
@@ -115,5 +116,110 @@ namespace BirdSellingAPI._2._Service.Services
                 StatusCode = StatusCodes.Status200OK
             };
         }
+
+        public ResponseModel UpdateStatusOrder(string orderid, OrderStatus orderStatus)
+        {
+            var orderentity = _orderRepository.GetSingle(x => x.Id == orderid);
+            orderentity.orderStatus = orderStatus;
+            _orderRepository.Update(orderentity);
+            return new ResponseModel()
+            {
+                MessageError = "cập nhật trạng thái thành công",
+                StatusCode = StatusCodes.Status200OK
+            };
+        }
+
+        //public ResponseModel UpdateDangVanChuyen(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.DangVanChuyen;
+        //    _orderRepository.Update(orderEntity);
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Cập nhật trạng thái thành công",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        //public ResponseModel UpdateDaThanhToan(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.DaThanhToan;
+        //    _orderRepository.Update(orderEntity);
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Cập nhật trạng thái thành công",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        //public ResponseModel UpdateDaXacNhan(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    if (orderEntity.orderStatus == _4._Core.EnumCore.OrderStatus.ChoXacNhan)
+        //    {
+        //        orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.DaXacNhan;
+        //        _orderRepository.Update(orderEntity);
+        //        return new ResponseModel { Data = orderEntity, StatusCode = StatusCodes.Status200OK };
+        //    }
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Không thể cập nhật trạng thái",
+        //        StatusCode = StatusCodes.Status400BadRequest
+        //    };
+        //}
+
+        //public ResponseModel UpdateHetHang(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.HetHang;
+        //    _orderRepository.Update(orderEntity);
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Cập nhật trạng thái thành công",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        //public ResponseModel UpdateHoanTraHang(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.HoanTraHang;
+        //    _orderRepository.Update(orderEntity);
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Cập nhật trạng thái thành công",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        //public ResponseModel UpdateHuyDon(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.HuyDon;
+        //    _orderRepository.Update(orderEntity);
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Cập nhật trạng thái thành công",
+        //        StatusCode = StatusCodes.Status200OK
+        //    };
+        //}
+
+        //public ResponseModel UpdateXacNhanHoanHang(string orderID)
+        //{
+        //    var orderEntity = _orderRepository.GetSingle(x => x.Id == orderID);
+        //    if (orderEntity.orderStatus == _4._Core.EnumCore.OrderStatus.ChoXacNhan)
+        //    {
+        //        orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.DaXacNhan;
+        //        _orderRepository.Update(orderEntity);
+        //        return new ResponseModel { Data = orderEntity, StatusCode = StatusCodes.Status200OK };
+        //    }
+        //    return new ResponseModel()
+        //    {
+        //        MessageError = "Không thể cập nhật trạng thái",
+        //        StatusCode = StatusCodes.Status400BadRequest
+        //    };
+        //}
+
     }
 }

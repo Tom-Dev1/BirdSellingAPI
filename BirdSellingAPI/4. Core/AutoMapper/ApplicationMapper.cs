@@ -4,6 +4,7 @@ using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Model.Auth;
 using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.OrderDetail;
+using BirdSellingAPI._4._Core.Model.PhoiGiong;
 using BirdSellingAPI._4._Core.Model.Product;
 using BirdSellingAPI._4._Core.Model.Role;
 using BirdSellingAPI._4._Core.Model.User;
@@ -55,6 +56,10 @@ namespace CarCategoriesApi.Helpers
             CreateMap<UserEntity, SignUpModel>().ReverseMap();
             CreateMap<UserEntity, SignInModel>().ReverseMap();
 
+            //Phoi Giong
+            CreateMap<PhoiGiongEntity, RequestPhoiGiongModel>().ReverseMap();
+            CreateMap<PhoiGiongEntity, ResponsePhoiGiongModel>().ReverseMap();
+            CreateMap<PhoiGiongEntity, UpdateTrangThaiPhoiGiongModel>().ReverseMap();
         }
     }
 }

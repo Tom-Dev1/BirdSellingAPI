@@ -4,6 +4,7 @@ using BirdSellingAPI._3._Repository.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BirdSellingAPI.Migrations
 {
     [DbContext(typeof(BirdFarmContext))]
-    partial class BirdFarmContextModelSnapshot : ModelSnapshot
+    [Migration("20231116181231_addNameInUser")]
+    partial class addNameInUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,20 +143,11 @@ namespace BirdSellingAPI.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<decimal?>("ConLai")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTimeOffset>("CreatedTime")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<decimal?>("DaThanhToan")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTimeOffset?>("DeletedTime")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<decimal?>("GiaTien")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTimeOffset>("LastUpdatedTime")
                         .HasColumnType("datetimeoffset");
@@ -167,12 +161,6 @@ namespace BirdSellingAPI.Migrations
                     b.Property<DateTimeOffset?>("NgayTrungNo")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<int>("PhoiGiongStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("SoChimGiao")
-                        .HasColumnType("int");
-
                     b.Property<int?>("SoTrung")
                         .HasColumnType("int");
 
@@ -182,10 +170,10 @@ namespace BirdSellingAPI.Migrations
                     b.Property<int?>("SoTrungNo")
                         .HasColumnType("int");
 
-                    b.Property<string>("bird_KH_id")
+                    b.Property<string>("bird_father_id")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("bird_Shop_id")
+                    b.Property<string>("bird_mother_id")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -244,9 +232,6 @@ namespace BirdSellingAPI.Migrations
 
                     b.Property<int>("statusProduct")
                         .HasColumnType("int");
-
-                    b.Property<string>("userID")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

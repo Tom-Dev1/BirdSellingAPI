@@ -4,6 +4,7 @@
     {
         Chim = 1,
         To = 2,
-        Trung =3
+        Trung =3,
+        ChimCuaKhachHang = 4,
     }
 }

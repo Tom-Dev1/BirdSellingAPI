@@ -6,6 +6,7 @@ using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._4._Core.Helper;
 using BirdSellingAPI._4._Core.Model.Auth;
 using BirdSellingAPI._4._Core.Model.EmailSettingModel;
+using BirdSellingAPI._4._Core.Model.User;
 
 namespace BirdSellingAPI._2._Service.Services
 {
@@ -38,6 +39,7 @@ namespace BirdSellingAPI._2._Service.Services
                 };
             }
             var Token = _generateTokenRepository.GenerateTokenModel(userLogin);
+            Token.ResponseUserModel = _mapper.Map<ResponseUserModel>(userLogin);
             return new ResponseModel
             {
                 Data = Token,

@@ -8,6 +8,8 @@ using BirdSellingAPI._4._Core.Model.EmailSettingModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -66,6 +68,8 @@ builder.Services.AddScoped<IRepositoryBase<CartEntity>, RepositoryBase<CartEntit
 builder.Services.AddScoped<IRepositoryBase<OrderEntity>, RepositoryBase<OrderEntity>>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IRepositoryBase<UserRefreshToken>, RepositoryBase<UserRefreshToken>>();
+builder.Services.AddScoped<IRepositoryBase<PhoiGiongEntity>, RepositoryBase<PhoiGiongEntity>>();
+builder.Services.AddScoped<IPhoiGiongRepository, PhoiGiongRepository>();
 
 builder.Services.AddScoped<IRepositoryBase<UserPaymentMenthodEntity>, RepositoryBase<UserPaymentMenthodEntity>>();
 
@@ -83,12 +87,21 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserPaymentMethodService, UserPaymentMethodService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
-
+builder.Services.AddScoped<IPhoiGiongService, PhoiGiongService>();
 
 
 //Auth
 builder.Services.AddScoped<GenerateToken>();
 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API Name", Version = "v1" });
+
+    // Set the comments path for the Swagger JSON and UI.
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

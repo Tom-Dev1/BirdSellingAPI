@@ -22,7 +22,7 @@ namespace BirdSellingAPI._2._Service.Services
         //Get ALL
         public ResponseModel GetAll()
         {
-            var response = _userRepository.GetAll();
+            var response = _mapper.Map<List<ResponseUserModel>>(_userRepository.GetAll().ToList());
             return new ResponseModel
             {
                 Data = response,

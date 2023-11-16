@@ -1,4 +1,5 @@
 ﻿using BirdSellingAPI._4._Core.EnumCore;
+using BirdSellingAPI._4._Core.Model.User;
 
 namespace BirdSellingAPI._4._Core.Model.Order
 {
@@ -17,5 +18,7 @@ namespace BirdSellingAPI._4._Core.Model.Order
         public string? orderTotal { get; set; }
 
         public OrderStatus? orderStatus { get; set; }
+
+        public ResponseUserModel? User { get; set; }
     }
 }

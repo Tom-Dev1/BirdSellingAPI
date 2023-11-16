@@ -33,6 +33,7 @@ namespace BirdSellingAPI._4._Core.Helper
                     new Claim (JwtRegisteredClaimNames.Email, userEntity.userEmail),
                     new Claim (JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim (ClaimTypes.Role, userEntity.Role.role_name),
+                    new Claim ("UserID", userEntity.Id),
                 }),
                 IssuedAt = DateTime.Now,
                 Expires = DateTime.Now.AddDays(1),

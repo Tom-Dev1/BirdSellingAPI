@@ -31,5 +31,8 @@ namespace BirdSellingAPI._3._Repository.Data
         public BirdCategoryEntity BirdCategory { get; set; }
 
         public virtual ICollection<CartEntity> Carts { get; set; }
+
+        public string? userID { get; set; }
+
     }
 }

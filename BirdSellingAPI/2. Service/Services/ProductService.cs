@@ -73,7 +73,10 @@ namespace BirdSellingAPI._2._Service.Services
             }
             var responseProductList = _productRepository.Get(x => x.category_id.Contains(getProductModel.category_id)
             && x.name.Contains(getProductModel.name) 
-            && (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)).ToList();
+            && (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)
+            && x.statusProduct != _4._Core.EnumCore.StatusProduct.DaBan && 
+            x.statusProduct != _4._Core.EnumCore.StatusProduct.DaXoa && 
+            x.TypeProduct != _4._Core.EnumCore.TypeProduct.ChimCuaKhachHang).ToList();
             if (getProductModel.TypeProduct.HasValue)
             {
                 responseProductList = responseProductList.Where(x => x.TypeProduct.Value == getProductModel.TypeProduct.Value).ToList();

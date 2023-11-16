@@ -6,7 +6,7 @@ namespace BirdSellingAPI._3._Repository.Data
     public class UserEntity : Entity 
     {
         public string? userName { get; set; }
-
+        public string? Name { get; set; }
         public string? userPassword { get; set; }
 
         public string? userEmail { get; set; }
