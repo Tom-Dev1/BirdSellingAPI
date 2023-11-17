@@ -55,5 +55,13 @@ namespace BirdSellingAPI._1._Web
             var response = _phoiGiongService.GetChimCungLoaiKhacGioiTinh(categoryId, Sex);
             return Ok(response);
         }
+
+        [HttpGet]
+        [Route("api/[controller]/GetAllPhoiChim")]
+        public IActionResult GetAllPhoiChim()
+        {
+            var response = _phoiGiongService.GetAllPhoiChim();
+            return Ok(response);
+        }
     }
 }
