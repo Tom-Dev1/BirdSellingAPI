@@ -10,17 +10,19 @@ namespace BirdSellingAPI._1._Web
     public class PhoiGiongController : ControllerBase
     {
         private readonly IPhoiGiongService _phoiGiongService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public PhoiGiongController(IPhoiGiongService phoiGiongService)
+        public PhoiGiongController(IPhoiGiongService phoiGiongService, IWebHostEnvironment webHostEnvironment)
         {
             _phoiGiongService = phoiGiongService;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [HttpPost]
         [Route("api/[controller]/Create-Phoi-Chim")]
-        public IActionResult CreatePhoiChim(RequestPhoiGiongModel requestPhoiGiongModel)
+        public IActionResult CreatePhoiChim([FromForm]RequestPhoiGiongModel requestPhoiGiongModel)
         {
-            var response = _phoiGiongService.CreatePhoiChim(requestPhoiGiongModel);
+            var response = _phoiGiongService.CreatePhoiChim(_webHostEnvironment, requestPhoiGiongModel);
             return Ok(response);
         }
 

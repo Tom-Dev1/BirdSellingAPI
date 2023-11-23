@@ -1,5 +1,8 @@
-﻿using BirdSellingAPI._4._Core.EnumCore;
+﻿using BirdSellingAPI._3._Repository.Data;
+using BirdSellingAPI._4._Core.EnumCore;
+using BirdSellingAPI._4._Core.Model.OrderDetail;
 using BirdSellingAPI._4._Core.Model.User;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BirdSellingAPI._4._Core.Model.Order
 {
@@ -20,5 +23,8 @@ namespace BirdSellingAPI._4._Core.Model.Order
         public OrderStatus? orderStatus { get; set; }
 
         public ResponseUserModel? User { get; set; }
+        public virtual ICollection<ResponseCartModel> Carts { get; set; }
+
+        public string? Address { get; set; }
     }
 }

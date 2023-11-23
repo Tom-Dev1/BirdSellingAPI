@@ -10,7 +10,7 @@ namespace BirdSellingAPI._4._Core.Model.Product
         }
         public string? category_id { get; set; }
 
-        public string? image { get; set; }
+        public IFormFile? imageFiles { get; set; }
 
         public decimal? price { get; set; }
 
@@ -25,7 +25,8 @@ namespace BirdSellingAPI._4._Core.Model.Product
         public string? bird_father_id { get; set; }
         public int? Discount { get; set; }
         public TypeProduct? TypeProduct { get; set; }
-        public DateTimeOffset day_of_birth { get; set; }
+        public StatusProduct statusProduct { get; set; }
+        public DateTimeOffset? day_of_birth { get; set; }
         public string? userId { get; set; }
 
     }

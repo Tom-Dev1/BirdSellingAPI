@@ -4,8 +4,12 @@ using BirdSellingAPI._2._Service.Model;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
 using BirdSellingAPI._3._Repository.Repository;
+using BirdSellingAPI._4._Core.EnumCore;
+using BirdSellingAPI._4._Core.Helper;
 using BirdSellingAPI._4._Core.Model.PhoiGiong;
 using BirdSellingAPI._4._Core.Model.Product;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.OpenApi.Extensions;
 
 namespace BirdSellingAPI._2._Service.Services
 {
@@ -23,7 +27,7 @@ namespace BirdSellingAPI._2._Service.Services
             _productRepository = productRepository;
         }
 
-        public ResponseModel CreatePhoiChim(RequestPhoiGiongModel requestPhoiGiongModel)
+        public ResponseModel CreatePhoiChim(IWebHostEnvironment webHostEnvironment, RequestPhoiGiongModel requestPhoiGiongModel)
         {
             var productCuaKHEntity = _mapper.Map<ProductEntity>(requestPhoiGiongModel.ChimCuaKhacHang);
             var phoiGiongEntity = new PhoiGiongEntity()
@@ -32,6 +36,10 @@ namespace BirdSellingAPI._2._Service.Services
                 bird_Shop_id = requestPhoiGiongModel.ChimMuonPhoi_id,
                 PhoiGiongStatus = _4._Core.EnumCore.PhoiGiongStatus.ChuaXacNhan
             };
+            var imageType = TypeProduct.ChimCuaKhachHang.GetDisplayName();
+            var imagePath = ImageHandler.UploadImageToFile(webHostEnvironment, requestPhoiGiongModel.ChimCuaKhacHang.imageFiles,
+                imageType.ToString(), productCuaKHEntity.Id);
+            productCuaKHEntity.image = imagePath;
             var result = _phoiGiongRepository.CreatePhoiGiong(productCuaKHEntity, phoiGiongEntity);
             if (result == false)
             {

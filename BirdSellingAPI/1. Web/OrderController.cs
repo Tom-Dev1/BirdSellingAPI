@@ -18,11 +18,25 @@ namespace BirdSellingAPI._1._Web
             _orderService = orderService;
         }
 
-        /// <summary>
-        /// <!--
-        /// ChoXacNhan = 1, DaXacNhan = 2, DangVanChuyen = 3, DaThanhToan = 4, HuyDon = 5, HoanTraHang = 6, HetHang = 7,
-        /// -->
-        /// </summary>
+        /// <remarks>
+        /// ChoXacNhan = 1, //Create
+        /// 
+        /// DaXacNhan = 2, //Nhan vien
+        /// 
+        /// DangVanChuyen = 3, //Nhan vien
+        /// 
+        /// DaThanhToan = 4, //Nhan vien
+        /// 
+        /// HuyDon = 5, Da van chuyen thi khong duoc huy don
+        /// 
+        /// HoanTraHang = 6, //Nhan vien
+        /// 
+        /// HetHang = 7, //Nhan vien
+        /// 
+        /// KhongNhanHang = 8, //Nhan vien
+        /// 
+        /// DaNhanHang = 9, //Khach Hang
+        /// </remarks>
         /// <returns></returns>
         [HttpGet]
         [Route("api/[controller]/GetAll")]
@@ -51,13 +65,26 @@ namespace BirdSellingAPI._1._Web
 
         }
 
-        /// <summary>
-        /// <!--
-        /// ChoXacNhan = 1, DaXacNhan = 2, DangVanChuyen = 3, DaThanhToan = 4, HuyDon = 5, HoanTraHang = 6, HetHang = 7,
-        /// -->
-        /// </summary>
-        /// <param name="orderId"></param>
-        /// <param name="orderStatus"></param>
+
+        /// <remarks>
+        /// ChoXacNhan = 1, //Create
+        /// 
+        /// DaXacNhan = 2, //Nhan vien
+        /// 
+        /// DangVanChuyen = 3, //Nhan vien
+        /// 
+        /// DaThanhToan = 4, //Nhan vien
+        /// 
+        /// HuyDon = 5, Da van chuyen thi khong duoc huy don
+        /// 
+        /// HoanTraHang = 6, //Nhan vien
+        /// 
+        /// HetHang = 7, //Nhan vien
+        /// 
+        /// KhongNhanHang = 8, //Nhan vien
+        /// 
+        /// DaNhanHang = 9, //Khach Hang
+        /// </remarks>
         /// <returns></returns>
         [HttpPut]
         [Route("api/[controller]/Update-Status-Product")]

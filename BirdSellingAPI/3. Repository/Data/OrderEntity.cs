@@ -24,6 +24,6 @@ namespace BirdSellingAPI._3._Repository.Data
         [ForeignKey(nameof(user_id))]
         public UserEntity User { get; set; }
 
-        public virtual ICollection<OrderEntity> orderEntities { get; set; }
+        public virtual ICollection<CartEntity> Carts { get; set; }
     }
 }

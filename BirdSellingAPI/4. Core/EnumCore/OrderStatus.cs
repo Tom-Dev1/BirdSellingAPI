@@ -2,12 +2,14 @@
 {
     public enum OrderStatus
     {
-        ChoXacNhan = 1,
-        DaXacNhan = 2,
-        DangVanChuyen = 3,
-        DaThanhToan = 4,
-        HuyDon = 5,
-        HoanTraHang = 6,
-        HetHang = 7,
+        ChoXacNhan = 1, //create
+        DaXacNhan = 2, //NV
+        DangVanChuyen = 3, //NV
+        DaThanhToan = 4, // NV
+        HuyDon = 5, //KH
+        HoanTraHang = 6, //KH
+        HetHang = 7, // NV
+        KhongNhanHang = 8, //NV
+        DaNhanHang = 9, //Khach Hang
     }
 }

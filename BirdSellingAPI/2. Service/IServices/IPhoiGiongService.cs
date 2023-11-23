@@ -11,6 +11,6 @@ namespace BirdSellingAPI._2._Service.IServices
         public ResponseModel GetUserProduct (string userID);
         public ResponseModel GetAllPhoiChim();
         public ResponseModel GetDetail(string phoiGiongId);
-        public ResponseModel CreatePhoiChim(RequestPhoiGiongModel requestPhoiGiongModel);
+        public ResponseModel CreatePhoiChim(IWebHostEnvironment webHostEnvironment, RequestPhoiGiongModel requestPhoiGiongModel);
     }
 }

@@ -5,9 +5,9 @@ namespace BirdSellingAPI._2._Service.IServices
 {
     public interface IProductService
     {
-        public ResponseModel CreateProduct (RequestProductModel requestProductModel);
+        public ResponseModel CreateProduct (IWebHostEnvironment webHostEnvironment, RequestProductModel requestProductModel);
         public ResponseModel GetListProduct(GetProductModel getProductModel);
-        public ResponseModel UpdateProduct(string id, RequestProductModel requestProductModel);
+        public ResponseModel UpdateProduct(IWebHostEnvironment webHostEnvironment, string id, RequestProductModel requestProductModel);
         public ResponseModel DeleteProduct(string id);
         public ResponseModel GetProductByID(string id);
 

@@ -27,6 +27,14 @@ namespace BirdSellingAPI._1._Web
             var responseModel = _userPaymentMenthodService.CreateUserPaymentMethod(requestUserPaymentModel);
             return Ok(responseModel);
         }
+        //Create
+        [HttpGet]
+        [Route("api/[controller]/GetAllPaymentMethod")]
+        public IActionResult GetAllPaymentMethod(RequestUserPaymentModel requestUserPaymentModel)
+        {
+            var responseModel = _userPaymentMenthodService.CreateUserPaymentMethod(requestUserPaymentModel);
+            return Ok(responseModel);
+        }
         [HttpGet]
         [Route("api/[controller]/GetPaymentID")]
         public IActionResult GetPaymentID(string id)

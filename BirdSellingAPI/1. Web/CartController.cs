@@ -26,9 +26,16 @@ namespace BirdSellingAPI._1._Web
 
         [HttpGet]
         [Route("api/[controller]/Get-All-Cart")]
-        public IActionResult GetAllCart()
+        public IActionResult GetAllCart(string userID)
         {
-            var responseModel = _cartService.GetAllCart();
+            var responseModel = _cartService.GetAllCart(userID);
+            return Ok(responseModel);
+        }
+        [HttpDelete]
+        [Route("api/[controller]/Delete-Carts")]
+        public IActionResult DeleteCarts(List<string> cartIdList)
+        {
+            var responseModel = _cartService.DeleteCartList(cartIdList);
             return Ok(responseModel);
         }
     }

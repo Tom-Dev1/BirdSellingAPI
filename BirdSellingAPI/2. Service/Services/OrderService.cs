@@ -10,6 +10,8 @@ using BirdSellingAPI._4._Core.EnumCore;
 using BirdSellingAPI._4._Core.Model.Order;
 using BirdSellingAPI._4._Core.Model.User;
 using Microsoft.EntityFrameworkCore.Diagnostics.Internal;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Immutable;
 using System.Reflection.Metadata.Ecma335;
 
 namespace BirdSellingAPI._2._Service.Services
@@ -22,16 +24,17 @@ namespace BirdSellingAPI._2._Service.Services
         private readonly IRepositoryBase<ProductEntity> _productRepository;
 
         public OrderService(IOrderRepository orderRepository, IMapper mapper
-            , IRepositoryBase<CartEntity> cartRepository)
+            , IRepositoryBase<CartEntity> cartRepository, IRepositoryBase<ProductEntity> productRepository)
         {
             _orderRepository = orderRepository;
             _mapper = mapper;
             _cartRepository = cartRepository;
+            _productRepository = productRepository;
         }
 
         public ResponseModel CreateOrder(RequestOrderModel requestOrderModel)
         {
-            var listCartEntity = _cartRepository.Get(x => requestOrderModel.listIDCarts.Contains(x.Id), 
+            var listCartEntity = _cartRepository.Get(x => requestOrderModel.listIDCarts.Contains(x.Id),
                 x => x.Product).ToList();
             //check don hang rong
             if (listCartEntity == null)
@@ -44,7 +47,7 @@ namespace BirdSellingAPI._2._Service.Services
 
             //Check cac product da ban hay chua
             var productInValid = listCartEntity.Any(
-               x => x.Product.statusProduct == _4._Core.EnumCore.StatusProduct.DaBan 
+               x => x.Product.statusProduct == _4._Core.EnumCore.StatusProduct.DaBan
             || x.Product.statusProduct == _4._Core.EnumCore.StatusProduct.DaXoa);
             if (productInValid)
             {
@@ -54,10 +57,10 @@ namespace BirdSellingAPI._2._Service.Services
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
-            var totalOrder = (decimal) 0;
+            var totalOrder = (decimal)0;
             foreach (var item in listCartEntity)
             {
-                totalOrder += (decimal) item.price!;
+                totalOrder += (decimal)item.price!;
             }
             var orderEntity = _mapper.Map<OrderEntity>(requestOrderModel);
             orderEntity.orderStatus = _4._Core.EnumCore.OrderStatus.ChoXacNhan;
@@ -71,7 +74,7 @@ namespace BirdSellingAPI._2._Service.Services
                 x.Product.statusProduct = _4._Core.EnumCore.StatusProduct.DaBan;
             });
 
-            
+
 
 
             var resultCreate = _orderRepository.CreateOrder(orderEntity, listCartEntity);
@@ -107,7 +110,7 @@ namespace BirdSellingAPI._2._Service.Services
         }
         public ResponseModel GetSingle(string id)
         {
-            var orderEntity = _orderRepository.GetSingle(x => x.Id.Equals(id));
+            var orderEntity = _orderRepository.GetSingle(x => x.Id.Equals(id), x => x.Carts);
             var responseOrder = _mapper.Map<ResponseOrderModel>(orderEntity);
             return new ResponseModel
             {
@@ -119,8 +122,53 @@ namespace BirdSellingAPI._2._Service.Services
 
         public ResponseModel UpdateStatusOrder(string orderid, OrderStatus orderStatus)
         {
-            var orderentity = _orderRepository.GetSingle(x => x.Id == orderid);
+            var orderentity = _orderRepository.GetSingle(x => x.Id == orderid, x => x.Carts);
             orderentity.orderStatus = orderStatus;
+            if (orderStatus == OrderStatus.DaXacNhan || orderStatus == OrderStatus.DangVanChuyen
+                || orderStatus == OrderStatus.DaThanhToan || orderStatus == OrderStatus.DaNhanHang)
+            {
+                var idProductInCarts = orderentity.Carts.Select(x => x.product_id).ToArray();
+                if (!idProductInCarts.IsNullOrEmpty())
+                {
+                    var productList = _productRepository.Get(x => idProductInCarts.Contains(x.Id)).ToList();
+                    foreach (var item in productList)
+                    {
+                        item.statusProduct = StatusProduct.DaBan;
+                    }
+                }
+            }
+            if (orderStatus == OrderStatus.HuyDon)
+            {
+                var idProductInCarts = orderentity.Carts.Select(x => x.product_id).ToList();
+                if (!idProductInCarts.IsNullOrEmpty())
+                {
+                    var productList = _productRepository.Get(x => idProductInCarts.Contains(x.Id)).ToList();
+                    foreach (var item in productList)
+                    {
+                        item.statusProduct = StatusProduct.ChuaBan;
+                    }
+                }
+            }
+            if (orderStatus == OrderStatus.HoanTraHang || orderStatus == OrderStatus.KhongNhanHang)
+            {
+                var idProductInCarts = orderentity.Carts.Select(x => x.product_id).ToList();
+                if (!idProductInCarts.IsNullOrEmpty())
+                {
+                    var productList = _productRepository.Get(x => idProductInCarts.Contains(x.Id)).ToList();
+                    foreach (var item in productList)
+                    {
+                        if (orderStatus == OrderStatus.HoanTraHang)
+                        {
+                            item.statusProduct = StatusProduct.HoanTraHang;
+                        }
+                        if (orderStatus == OrderStatus.KhongNhanHang)
+                        {
+                            item.statusProduct = StatusProduct.KhongNhanHang;
+                        }
+                    }
+                }
+            }
+
             _orderRepository.Update(orderentity);
             return new ResponseModel()
             {

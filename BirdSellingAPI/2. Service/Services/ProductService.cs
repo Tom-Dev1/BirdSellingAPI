@@ -4,7 +4,10 @@ using BirdSellingAPI._2._Service.Model;
 using BirdSellingAPI._2._Service.Model.BirdCategory;
 using BirdSellingAPI._3._Repository.BaseRepository;
 using BirdSellingAPI._3._Repository.Data;
+using BirdSellingAPI._4._Core.EnumCore;
+using BirdSellingAPI._4._Core.Helper;
 using BirdSellingAPI._4._Core.Model.Product;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Tokens;
 
 namespace BirdSellingAPI._2._Service.Services
@@ -14,12 +17,12 @@ namespace BirdSellingAPI._2._Service.Services
         private readonly IRepositoryBase<ProductEntity> _productRepository;
         private readonly IMapper _mapper;
 
-        public ProductService(IRepositoryBase<ProductEntity> repositoryBase, IMapper mapper) 
+        public ProductService(IRepositoryBase<ProductEntity> repositoryBase, IMapper mapper)
         {
             _productRepository = repositoryBase;
             _mapper = mapper;
         }
-        public ResponseModel CreateProduct(RequestProductModel requestProductModel)
+        public ResponseModel CreateProduct(IWebHostEnvironment webHostEnvironment, RequestProductModel requestProductModel)
         {
             var entity = _mapper.Map<ProductEntity>(requestProductModel);
             if (entity == null)
@@ -38,6 +41,11 @@ namespace BirdSellingAPI._2._Service.Services
                     StatusCode = StatusCodes.Status400BadRequest
                 };
             }
+            var imageType = requestProductModel.TypeProduct.GetValueOrDefault();
+            var imagePath = ImageHandler.UploadImageToFile(webHostEnvironment, requestProductModel.imageFiles,
+                imageType.ToString(), entity.Id);
+            entity.image = imagePath;
+            entity.statusProduct = StatusProduct.ChuaBan;
             _productRepository.Create(entity);
             return new ResponseModel
             {
@@ -72,11 +80,8 @@ namespace BirdSellingAPI._2._Service.Services
                 getProductModel.category_id = "";
             }
             var responseProductList = _productRepository.Get(x => x.category_id.Contains(getProductModel.category_id)
-            && x.name.Contains(getProductModel.name) 
-            && (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)
-            && x.statusProduct != _4._Core.EnumCore.StatusProduct.DaBan && 
-            x.statusProduct != _4._Core.EnumCore.StatusProduct.DaXoa && 
-            x.TypeProduct != _4._Core.EnumCore.TypeProduct.ChimCuaKhachHang).ToList();
+            && x.name.Contains(getProductModel.name)
+            && (getProductModel.priceFrom <= x.price && x.price <= getProductModel.priceTo)).ToList();
             if (getProductModel.TypeProduct.HasValue)
             {
                 responseProductList = responseProductList.Where(x => x.TypeProduct.Value == getProductModel.TypeProduct.Value).ToList();
@@ -104,7 +109,7 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
 
-        public ResponseModel UpdateProduct(string id, RequestProductModel requestProductModel)
+        public ResponseModel UpdateProduct(IWebHostEnvironment webHostEnvironment, string id, RequestProductModel requestProductModel)
         {
             var productEntity = _productRepository.GetSingle(x => x.Id.Equals(id));
             if (productEntity == null)
@@ -116,6 +121,10 @@ namespace BirdSellingAPI._2._Service.Services
                 };
             }
             _mapper.Map(requestProductModel, productEntity);
+            var imageType = requestProductModel.TypeProduct.GetValueOrDefault();
+            var imagePath = ImageHandler.UploadImageToFile(webHostEnvironment, requestProductModel.imageFiles,
+                imageType.ToString(), productEntity.Id);
+            productEntity.image = imagePath;
             _productRepository.Update(productEntity);
             //_birdCategoryRepository.Delete(birdCategoryEntity);
             return new ResponseModel

@@ -38,8 +38,7 @@ namespace BirdSellingAPI._2._Service.Services
             }
 
             var productEntity = _productRepository.GetSingle(x => x.Id == cartEntity.product_id);
-            if (productEntity.statusProduct == _4._Core.EnumCore.StatusProduct.DaBan ||
-                productEntity.statusProduct == _4._Core.EnumCore.StatusProduct.DaXoa)
+            if (productEntity.statusProduct != _4._Core.EnumCore.StatusProduct.ChuaBan)
             {
                 return new ResponseModel
                 {
@@ -58,14 +57,23 @@ namespace BirdSellingAPI._2._Service.Services
             };
         }
 
-        public ResponseModel UpdateProductCart(RequestCartModel requestCartModel)
+        public ResponseModel DeleteCartList(List<string> cartIdList)
         {
-            throw new NotImplementedException();
+            var cartList = _CartRepository.Get(x => cartIdList.Contains(x.Id)).ToList();
+            cartList.ForEach(x =>
+            {
+                _CartRepository.Delete(x);
+            });
+            return new ResponseModel
+            {
+                StatusCode = 200
+            };
         }
 
-        public ResponseModel GetAllCart()
+        public ResponseModel GetAllCart(string userID)
         {
-            var cartEntity = _CartRepository.Get(x => x.order_id == null, x => x.Product);
+            var cartEntity = _CartRepository.Get(x => x.order_id == null && x.user_id == userID,
+                x => x.Product);
             var cartResponseModel = _mapper.Map<List<ResponseCartModel>>(cartEntity.ToList());
             return new ResponseModel
             {

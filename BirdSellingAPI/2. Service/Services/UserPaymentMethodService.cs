@@ -80,5 +80,12 @@ namespace BirdSellingAPI._2._Service.Services
                 StatusCode = StatusCodes.Status200OK
             };
         }
+
+        public ResponseModel GetAllPaymentMethod()
+        {
+            var entities = _userPaymentMenthodRepository.GetAll();
+            var responseBirdCategoryModel = _mapper.Map<List<ResponseUserPaymentModel>>(entities);
+            return new ResponseModel() { Data = responseBirdCategoryModel, StatusCode = 200 };
+        }
     }
 }

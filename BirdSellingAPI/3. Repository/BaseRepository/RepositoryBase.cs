@@ -77,5 +77,10 @@ namespace BirdSellingAPI._3._Repository.BaseRepository
             _dbSet.Update(entity);
             _context.SaveChanges();
         }
+
+        public void UpdatePatch(T entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

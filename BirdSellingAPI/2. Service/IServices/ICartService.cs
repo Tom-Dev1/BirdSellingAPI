@@ -6,8 +6,8 @@ namespace BirdSellingAPI._2._Service.IServices
     public interface ICartService
     {
         public ResponseModel AddProductToCart(RequestCartModel requestCartModel);
-        public ResponseModel GetAllCart();
-        public ResponseModel UpdateProductCart(RequestCartModel requestCartModel);
+        public ResponseModel GetAllCart(string userID);
+        public ResponseModel DeleteCartList(List<string> cartIdList);
 
     }
 }

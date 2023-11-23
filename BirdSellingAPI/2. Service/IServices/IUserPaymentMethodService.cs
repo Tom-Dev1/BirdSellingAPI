@@ -10,7 +10,7 @@ namespace BirdSellingAPI._2._Service.IServices
         public ResponseModel UpdatePaymentMenthod(string id, RequestUserPaymentModel requestUserPaymentModel);
         public ResponseModel DeletePaymentMenthod(string id);
 
-
+        public ResponseModel GetAllPaymentMethod();
 
 
     }

@@ -6,5 +6,6 @@
         DaBan = 2,
         DaXoa = 3,
         KhongNhanHang = 4,
+        HoanTraHang = 5,
     }
 }

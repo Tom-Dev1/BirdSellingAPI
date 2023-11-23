@@ -12,29 +12,42 @@ namespace BirdSellingAPI._1._Web
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IProductService _productSerivce;
         //private readonly object _productRepository;
 
-        public ProductController(IProductService service) 
+        public ProductController(IWebHostEnvironment webHostEnvironment, IProductService service)
         {
+            _webHostEnvironment = webHostEnvironment;
             _productSerivce = service;
         }
 
         [HttpPost]
         [Route("api/[controller]/CreateProduct")]
-        public IActionResult CreateProduct (RequestProductModel requestProductModel)
+        public IActionResult CreateProduct([FromForm] RequestProductModel requestProductModel)
         {
-            var response = _productSerivce.CreateProduct(requestProductModel);
+            var response = _productSerivce.CreateProduct(_webHostEnvironment,requestProductModel);
             return Ok(response);
         }
 
+
+        /// <remarks>
+        /// status Product {ChuaBan = 1, DaBan = 2, DaXoa = 3, KhongNhanHang = 4,}
+        /// 
+        /// type Product {Chim = 1, To = 2, Trung =3, ChimCuaKhachHang = 4}
+        /// </remarks>
+        /// <summary>
+        /// hiện các sản phẩm chưa bán, và là chim trứng tổ
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/[controller]/GetProduct")]
-        public IActionResult GetProduct([FromQuery]GetProductModel getProductModel)
+        public IActionResult GetProduct([FromQuery] GetProductModel getProductModel)
         {
             var response = _productSerivce.GetListProduct(getProductModel);
             return Ok(response);
         }
+
         [HttpGet]
         [Route("api/[controller]/GetProductByID/{id}")]
         public IActionResult GetProductByID(string id)
@@ -54,9 +67,9 @@ namespace BirdSellingAPI._1._Web
 
         [HttpPut]
         [Route("api/[controller]/UpdateProduct/{id}")]
-        public IActionResult UpdateProduct(string id, RequestProductModel requestProductModel)
+        public IActionResult UpdateProduct(string id, [FromForm] RequestProductModel requestProductModel)
         {
-            var response = _productSerivce.UpdateProduct(id, requestProductModel);
+            var response = _productSerivce.UpdateProduct(_webHostEnvironment, id, requestProductModel);
             return Ok(response);
         }
 
